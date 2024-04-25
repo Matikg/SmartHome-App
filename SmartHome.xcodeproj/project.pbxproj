@@ -22,6 +22,7 @@
 		E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */; };
 		E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7E2BDA81D5000FC08D /* DeviceView.swift */; };
 		E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */; };
+		E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B822BDA8351000FC08D /* DeviceListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		E8811B7E2BDA81D5000FC08D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypePicker.swift; sourceTree = "<group>"; };
+		E8811B822BDA8351000FC08D /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
-				E8811B712BDA6C10000FC08D /* ViewModels */,
-				E8811B702BDA6C07000FC08D /* Views */,
 				E8811B6F2BDA6BFC000FC08D /* Models */,
-				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
-				E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */,
+				E8811B702BDA6C07000FC08D /* Views */,
+				E8811B712BDA6C10000FC08D /* ViewModels */,
+				E8811B842BDA841E000FC08D /* CustomStyles */,
 				E8811B6E2BDA6A3E000FC08D /* MQTT */,
 				E8811B602BDA4DBE000FC08D /* Assets.xcassets */,
 				E8811B622BDA4DBE000FC08D /* Preview Content */,
@@ -141,6 +142,7 @@
 				E8811B7A2BDA80A5000FC08D /* HomeView.swift */,
 				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
 				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
+				E8811B822BDA8351000FC08D /* DeviceListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +153,15 @@
 				E8811B742BDA6CF6000FC08D /* HomeModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E8811B842BDA841E000FC08D /* CustomStyles */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
+				E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */,
+			);
+			path = CustomStyles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +285,7 @@
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
 				E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */,
+				E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */,
 				E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */,
 				E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
