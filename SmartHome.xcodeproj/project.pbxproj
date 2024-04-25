@@ -12,6 +12,8 @@
 		E8811B5F2BDA4DBA000FC08D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B5E2BDA4DBA000FC08D /* ContentView.swift */; };
 		E8811B612BDA4DBE000FC08D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8811B602BDA4DBE000FC08D /* Assets.xcassets */; };
 		E8811B642BDA4DBE000FC08D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8811B632BDA4DBE000FC08D /* Preview Assets.xcassets */; };
+		E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6A2BDA6959000FC08D /* MQTTManager.swift */; };
+		E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		E8811B5E2BDA4DBA000FC08D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E8811B602BDA4DBE000FC08D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8811B632BDA4DBE000FC08D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E8811B6A2BDA6959000FC08D /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
+		E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTAppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 			children = (
 				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
 				E8811B5E2BDA4DBA000FC08D /* ContentView.swift */,
+				E8811B6E2BDA6A3E000FC08D /* MQTT */,
 				E8811B602BDA4DBE000FC08D /* Assets.xcassets */,
 				E8811B622BDA4DBE000FC08D /* Preview Content */,
 			);
@@ -89,6 +94,15 @@
 				E8811B632BDA4DBE000FC08D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E8811B6E2BDA6A3E000FC08D /* MQTT */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */,
+				E8811B6A2BDA6959000FC08D /* MQTTManager.swift */,
+			);
+			path = MQTT;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8811B5F2BDA4DBA000FC08D /* ContentView.swift in Sources */,
+				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
+				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
