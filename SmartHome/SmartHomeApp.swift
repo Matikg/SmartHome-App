@@ -19,7 +19,7 @@ struct SmartHomeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ToolBarView()
                 .environmentObject(homeModel)
                 .environmentObject(mqttManager)
         }
