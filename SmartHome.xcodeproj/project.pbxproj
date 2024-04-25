@@ -15,6 +15,7 @@
 		E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6A2BDA6959000FC08D /* MQTTManager.swift */; };
 		E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */; };
 		E8811B732BDA6C38000FC08D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B722BDA6C38000FC08D /* Room.swift */; };
+		E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B742BDA6CF6000FC08D /* HomeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E8811B6A2BDA6959000FC08D /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
 		E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTAppState.swift; sourceTree = "<group>"; };
 		E8811B722BDA6C38000FC08D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		E8811B742BDA6CF6000FC08D /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
-				E8811B712BDA6C10000FC08D /* ModelViews */,
+				E8811B712BDA6C10000FC08D /* ViewModels */,
 				E8811B702BDA6C07000FC08D /* Views */,
 				E8811B6F2BDA6BFC000FC08D /* Models */,
 				E8811B5E2BDA4DBA000FC08D /* ContentView.swift */,
@@ -125,11 +127,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E8811B712BDA6C10000FC08D /* ModelViews */ = {
+		E8811B712BDA6C10000FC08D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E8811B742BDA6CF6000FC08D /* HomeModel.swift */,
 			);
-			path = ModelViews;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +251,7 @@
 			files = (
 				E8811B5F2BDA4DBA000FC08D /* ContentView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
+				E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
 				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,

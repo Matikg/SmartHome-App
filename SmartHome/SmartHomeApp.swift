@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct SmartHomeApp: App {
+    
+    var homeModel = HomeModel()
+    var mqttManager = MQTTManager()
+    
+    init() {
+        homeModel.mqttManager = mqttManager
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(homeModel)
+                .environmentObject(mqttManager)
         }
     }
 }
