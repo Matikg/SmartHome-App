@@ -21,6 +21,7 @@
 		E8811B7B2BDA80A5000FC08D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7A2BDA80A5000FC08D /* HomeView.swift */; };
 		E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */; };
 		E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7E2BDA81D5000FC08D /* DeviceView.swift */; };
+		E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E8811B7A2BDA80A5000FC08D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		E8811B7E2BDA81D5000FC08D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
+		E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				E8811B702BDA6C07000FC08D /* Views */,
 				E8811B6F2BDA6BFC000FC08D /* Models */,
 				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
+				E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */,
 				E8811B6E2BDA6A3E000FC08D /* MQTT */,
 				E8811B602BDA4DBE000FC08D /* Assets.xcassets */,
 				E8811B622BDA4DBE000FC08D /* Preview Content */,
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8811B7B2BDA80A5000FC08D /* HomeView.swift in Sources */,
+				E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */,
 				E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */,
 				E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */,
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
