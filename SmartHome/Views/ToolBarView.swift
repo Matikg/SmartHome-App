@@ -10,7 +10,7 @@ import SwiftUI
 struct ToolBarView: View {
     var body: some View {
         TabView {
-            //HomeView()
+            HomeView()
                 .tabItem {
                     VStack {
                         Image(systemName: "house.fill")
@@ -18,7 +18,7 @@ struct ToolBarView: View {
                     }
                 }
             
-            //DeviceListView()
+            DeviceListView()
                 .tabItem {
                     VStack {
                         Image(systemName: "lightbulb.2.fill")
@@ -26,7 +26,7 @@ struct ToolBarView: View {
                     }
                 }
             
-            //AnalyticsView()
+            AnalyticsView()
                 .tabItem {
                     VStack {
                         Image(systemName: "chart.xyaxis.line")

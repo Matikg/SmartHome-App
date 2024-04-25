@@ -18,6 +18,9 @@
 		E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B742BDA6CF6000FC08D /* HomeModel.swift */; };
 		E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B762BDA7E0A000FC08D /* SettingsView.swift */; };
 		E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */; };
+		E8811B7B2BDA80A5000FC08D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7A2BDA80A5000FC08D /* HomeView.swift */; };
+		E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */; };
+		E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7E2BDA81D5000FC08D /* DeviceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		E8811B742BDA6CF6000FC08D /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		E8811B762BDA7E0A000FC08D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarWithSettings.swift; sourceTree = "<group>"; };
+		E8811B7A2BDA80A5000FC08D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
+		E8811B7E2BDA81D5000FC08D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,9 @@
 			children = (
 				E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */,
 				E8811B762BDA7E0A000FC08D /* SettingsView.swift */,
+				E8811B7A2BDA80A5000FC08D /* HomeView.swift */,
+				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
+				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -255,10 +264,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8811B7B2BDA80A5000FC08D /* HomeView.swift in Sources */,
 				E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */,
 				E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */,
+				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
 				E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */,
+				E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */,
 				E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
