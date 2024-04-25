@@ -14,6 +14,7 @@
 		E8811B642BDA4DBE000FC08D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8811B632BDA4DBE000FC08D /* Preview Assets.xcassets */; };
 		E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6A2BDA6959000FC08D /* MQTTManager.swift */; };
 		E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */; };
+		E8811B732BDA6C38000FC08D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B722BDA6C38000FC08D /* Room.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E8811B632BDA4DBE000FC08D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E8811B6A2BDA6959000FC08D /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
 		E8811B6C2BDA6A18000FC08D /* MQTTAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTAppState.swift; sourceTree = "<group>"; };
+		E8811B722BDA6C38000FC08D /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
+				E8811B712BDA6C10000FC08D /* ModelViews */,
+				E8811B702BDA6C07000FC08D /* Views */,
+				E8811B6F2BDA6BFC000FC08D /* Models */,
 				E8811B5E2BDA4DBA000FC08D /* ContentView.swift */,
 				E8811B6E2BDA6A3E000FC08D /* MQTT */,
 				E8811B602BDA4DBE000FC08D /* Assets.xcassets */,
@@ -103,6 +108,28 @@
 				E8811B6A2BDA6959000FC08D /* MQTTManager.swift */,
 			);
 			path = MQTT;
+			sourceTree = "<group>";
+		};
+		E8811B6F2BDA6BFC000FC08D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B722BDA6C38000FC08D /* Room.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E8811B702BDA6C07000FC08D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E8811B712BDA6C10000FC08D /* ModelViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +250,7 @@
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
+				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
