@@ -9,16 +9,36 @@ import SwiftUI
 
 struct ToolBarView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            //HomeView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "house.fill")
+                        Text("Analysis")
+                    }
+                }
+            
+            //DeviceListView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "lightbulb.2.fill")
+                        Text("Devices")
+                    }
+                }
+            
+            //AnalyticsView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "chart.xyaxis.line")
+                        Text("Analysis")
+                    }
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
     ToolBarView()
+        .environmentObject(HomeModel())
+        .environmentObject(MQTTManager())
 }
