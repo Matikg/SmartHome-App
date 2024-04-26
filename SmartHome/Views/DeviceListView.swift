@@ -8,34 +8,60 @@
 import SwiftUI
 
 struct DeviceListView: View {
-    @State private var showingSettings = false
+    
     @EnvironmentObject var homeModel: HomeModel
-    @State var currentDeviceType: DeviceType?
+    @State private var showingSettings = false
+    @State private var currentDeviceType: DeviceType?
+    @State private var showGrid = false
+    @State private var scrollToTopTrigger = false
     
     var body: some View {
         NavigationView {
-            VStack {
+            ScrollViewReader { scrollProxy in
                 
-                DeviceTypePicker(currentDeviceType: $currentDeviceType)
-                    .padding()
                 
-                ScrollView {
-                    LazyVStack() {
-                        ForEach(homeModel.rooms) { room in
-                            Text(room.name)
-                            ForEach(filteredDevices(for: room)) { device in
-                                DeviceView(device: device)
-                                    .animation(.default, value: currentDeviceType)
+                VStack {
+                    DeviceTypePicker(currentDeviceType: $currentDeviceType)
+                        .onChange(of: currentDeviceType) {
+                            withAnimation {
+                                scrollProxy.scrollTo(0, anchor: .top)
                             }
                         }
+                        .padding()
+                    
+                    ScrollView {
+                        ForEach(filteredRooms()) { room in
+                            // Display the room name outside of the grid
+                            Text(room.name)
+                                .padding(.horizontal)
+                                .font(.headline)
+                                .id(0)
+                            
+                            
+                            // LazyVGrid for devices within the room
+                            LazyVGrid(columns: Array(repeating: GridItem(), count: 1), spacing: 10) {
+                                ForEach(filteredDevices(for: room)) { device in
+                                    DeviceView(device: device)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
+                .settingsToolbar(showingSettings: $showingSettings, title: "Devices")
             }
-            .settingsToolbar(showingSettings: $showingSettings, title: "Devices")
         }
     }
     
+    private func filteredRooms() -> [Room] {
+        guard let type = currentDeviceType else {
+            return homeModel.rooms
+        }
+        return homeModel.rooms.filter { room in
+            room.devices.contains { $0.type == type }
+        }
+    }
     
     private func filteredDevices(for room: Room) -> [Device] {
         guard let type = currentDeviceType else {
@@ -43,7 +69,6 @@ struct DeviceListView: View {
         }
         return room.devices.filter { $0.type == type }
     }
-    
 }
 
 
@@ -52,6 +77,7 @@ struct DeviceListView: View {
         .environmentObject(MQTTManager())
         .environmentObject(HomeModel())
 }
+
 
 
 

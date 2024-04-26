@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DeviceView: View {
+    
     @EnvironmentObject var homeModel: HomeModel
     var device: Device
 

@@ -14,7 +14,7 @@ struct ToolBarView: View {
                 .tabItem {
                     VStack {
                         Image(systemName: "house.fill")
-                        Text("Analysis")
+                        Text("Home")
                     }
                 }
             
