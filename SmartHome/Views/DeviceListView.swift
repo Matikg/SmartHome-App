@@ -19,7 +19,6 @@ struct DeviceListView: View {
         NavigationView {
             ScrollViewReader { scrollProxy in
                 
-                
                 VStack {
                     DeviceTypePicker(currentDeviceType: $currentDeviceType)
                         .onChange(of: currentDeviceType) {
@@ -32,10 +31,14 @@ struct DeviceListView: View {
                     ScrollView {
                         ForEach(filteredRooms()) { room in
                             // Display the room name outside of the grid
-                            Text(room.name)
-                                .padding(.horizontal)
-                                .font(.headline)
-                                .id(0)
+                            HStack {
+                                Text(room.name)
+                                    .padding()
+                                    .font(.headline)
+                                    .id(0)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading)
                             
                             
                             // LazyVGrid for devices within the room

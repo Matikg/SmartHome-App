@@ -10,8 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var mqttManager: MQTTManager
-    @State private var host: String = ""
-    @State private var identifier: String = ""
+    @State private var host: String = "192.168.22.112"
+    @State private var identifier: String = "iOS Device"
     @State private var topic: String = ""
     @State private var message: String = ""
     @State private var username: String = ""

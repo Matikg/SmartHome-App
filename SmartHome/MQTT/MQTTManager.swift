@@ -27,16 +27,7 @@ final class MQTTManager: ObservableObject {
         }
     }
 
-    // MARK: Shared Instance
-
-    static let _shared = MQTTManager()
-
-    // MARK: - Accessors
-
-    class func shared() -> MQTTManager {
-        return _shared
-    }
-
+    
     func initializeMQTT(host: String, identifier: String, username: String? = nil, password: String? = nil) {
         // If any previous instance exists then clean it
         if mqttClient != nil {
@@ -59,6 +50,7 @@ final class MQTTManager: ObservableObject {
         mqttClient?.keepAlive = 60
         mqttClient?.delegate = self
     }
+    
 
     func connect() {
         if let success = mqttClient?.connect(), success {
@@ -67,11 +59,13 @@ final class MQTTManager: ObservableObject {
             currentAppState.setAppConnectionState(state: .disconnected)
         }
     }
+    
 
     func subscribe(topic: String) {
         self.topic = topic
         mqttClient?.subscribe(topic, qos: .qos1)
     }
+    
 
     func publish(topic: String ,with message: String) {
         mqttClient?.publish(topic, withString: message, qos: .qos1)
@@ -82,27 +76,31 @@ final class MQTTManager: ObservableObject {
         mqttClient?.disconnect()
     }
 
-    /// Unsubscribe from a topic
+    
     func unSubscribe(topic: String) {
         mqttClient?.unsubscribe(topic)
     }
 
-    /// Unsubscribe from a topic
+    
     func unSubscribeFromCurrentTopic() {
         mqttClient?.unsubscribe(topic)
     }
+    
     
     func currentHost() -> String? {
         return host
     }
     
+    
     func isSubscribed() -> Bool {
        return currentAppState.appConnectionState.isSubscribed
     }
     
+    
     func isConnected() -> Bool {
         return currentAppState.appConnectionState.isConnected
     }
+    
     
     func connectionStateMessage() -> String {
         return currentAppState.appConnectionState.description
@@ -110,6 +108,7 @@ final class MQTTManager: ObservableObject {
 }
 
 extension MQTTManager: CocoaMQTTDelegate {
+    
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
         TRACE("topic: \(success)")
         currentAppState.setAppConnectionState(state: .connectedSubscribed)
