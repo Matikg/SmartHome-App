@@ -25,17 +25,19 @@ struct Device: Identifiable {
             return Image("light-bulb")
         case .socket:
             return Image("socket")
-        case .thermostat:
-            return Image("thermostat")
         case .lock:
             return Image("lock")
+        case .blinds:
+            return Image("blinds")
+        case .vent:
+            return Image("vent")
         }
     }
     var isOn: Bool
 }
 
 enum DeviceType: String, CaseIterable {
-    case light, socket, thermostat, lock
+    case light, socket, lock, blinds, vent
     
     var image: String {
         switch self {
@@ -43,10 +45,12 @@ enum DeviceType: String, CaseIterable {
             return "light-bulb"
         case .socket:
             return "socket"
-        case .thermostat:
-            return "thermostat"
         case .lock:
             return "lock"
+        case .blinds:
+            return "blinds"
+        case .vent:
+            return "vent"
         }
     }
 }

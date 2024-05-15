@@ -55,12 +55,12 @@ final class MQTTAppState: ObservableObject {
 
     func setReceivedMessage(text: String) {
         receivedMessage = text
-        historyText = historyText + "\n" + receivedMessage
+        
     }
 
     func clearData() {
         receivedMessage = ""
-        historyText = ""
+        
     }
 
     func setAppConnectionState(state: MQTTAppConnectionState) {
