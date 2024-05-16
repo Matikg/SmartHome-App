@@ -19,20 +19,7 @@ struct Device: Identifiable {
     var id: String
     var name: String
     var type: DeviceType
-    var photo: Image {
-        switch type {
-        case .light:
-            return Image("light-bulb")
-        case .socket:
-            return Image("socket")
-        case .lock:
-            return Image("lock")
-        case .blinds:
-            return Image("blinds")
-        case .vent:
-            return Image("vent")
-        }
-    }
+    var photo: String
     var isOn: Bool
 }
 

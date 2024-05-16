@@ -40,5 +40,5 @@ struct ToolBarView: View {
 #Preview {
     ToolBarView()
         .environmentObject(HomeModel())
-        .environmentObject(MQTTManager())
+        .environmentObject(MQTTManager(homeModel: HomeModel()))
 }

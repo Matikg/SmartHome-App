@@ -23,7 +23,7 @@ struct AnalyticsView: View {
 
 #Preview {
     AnalyticsView()
-        .environmentObject(MQTTManager())
+        .environmentObject(MQTTManager(homeModel: HomeModel()))
         .environmentObject(HomeModel())
 }
 

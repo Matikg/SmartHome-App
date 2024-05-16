@@ -77,7 +77,7 @@ struct DeviceListView: View {
 
 #Preview {
     DeviceListView()
-        .environmentObject(MQTTManager())
+        .environmentObject(MQTTManager(homeModel: HomeModel()))
         .environmentObject(HomeModel())
 }
 

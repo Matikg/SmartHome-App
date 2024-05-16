@@ -14,9 +14,8 @@ struct DeviceView: View {
 
     var body: some View {
         HStack {
-//            Image(systemName: device.isOn ? "lightbulb.fill" : "lightbulb")
-//                .foregroundColor(device.isOn ? .yellow : .gray)
-            device.photo
+
+            Image(device.photo)
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(device.name)

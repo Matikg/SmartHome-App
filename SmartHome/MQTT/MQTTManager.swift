@@ -17,13 +17,13 @@ final class MQTTManager: ObservableObject {
     var topic: String!
     var username: String!
     var password: String!
-    
-    @EnvironmentObject var homeModel: HomeModel
+    var homeModel: HomeModel
     
     @Published var currentAppState = MQTTAppState()
     private var anyCancellable: AnyCancellable?
-    //Private Init
-    init() {
+    
+    init(homeModel: HomeModel) {
+        self.homeModel = homeModel
         // Workaround to support nested Observables, without this code changes to state is not propagated
         anyCancellable = currentAppState.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
@@ -69,6 +69,11 @@ final class MQTTManager: ObservableObject {
         mqttClient?.subscribe(topic, qos: .qos1)
     }
     
+    func multipleSubscribe(topics: [String]) {
+        topics.forEach { topic in
+            mqttClient?.subscribe(topic, qos: .qos1)
+        }
+    }
     
     func publish(topic: String ,with message: String) {
         mqttClient?.publish(topic, withString: message, qos: .qos1)
@@ -124,7 +129,8 @@ extension MQTTManager: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         if ack == .accept {
             currentAppState.setAppConnectionState(state: .connected)
-            subscribe(topic: "master/temperature")
+            self.subscribe(topic: "master/temperature")
+            self.multipleSubscribe(topics: ["master/temperature"])
         }
     }
     
@@ -136,8 +142,15 @@ extension MQTTManager: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
 //        currentAppState.setReceivedMessage(text: message.string.description)
-        if let msgString = message.string, message.topic == "master/temperature" {
-            homeModel.temperature = msgString
+        guard let msgString = message.string else { return }
+        
+        switch message.topic {
+        case "master/temperature":
+            DispatchQueue.main.async {
+                self.homeModel.temperature = msgString
+            }
+        default:
+            print("Received message for an unhandled topic")
         }
     }
     

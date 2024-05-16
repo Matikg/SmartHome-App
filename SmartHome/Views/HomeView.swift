@@ -45,6 +45,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .environmentObject(MQTTManager())
+        .environmentObject(MQTTManager(homeModel: HomeModel()))
         .environmentObject(HomeModel())
 }

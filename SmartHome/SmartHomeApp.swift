@@ -11,9 +11,10 @@ import SwiftUI
 struct SmartHomeApp: App {
     
     var homeModel = HomeModel()
-    var mqttManager = MQTTManager()
+    var mqttManager: MQTTManager
     
     init() {
+        self.mqttManager = MQTTManager(homeModel: homeModel)
         homeModel.mqttManager = mqttManager
     }
     

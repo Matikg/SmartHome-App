@@ -73,7 +73,7 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .environmentObject(MQTTManager())
+        .environmentObject(MQTTManager(homeModel: HomeModel()))
 }
 
 
