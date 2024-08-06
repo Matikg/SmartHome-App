@@ -8,14 +8,16 @@
 import Foundation
 import SwiftUI
 
-class HomeModel: ObservableObject {
-    
+final class HomeModel: ObservableObject {
     @Published var rooms = [Room]()
     @Published var temperature: String = "20"
-    var mqttManager: MQTTManager?
+    private let mqttManager: MQTTManager
     
-    init() {
+    init(mqttManager: MQTTManager) {
+        self.mqttManager = mqttManager
         loadRooms()
+        // mqttManager.currentValueSubject.sink{}
+        
     }
     
     func toggleDevice(withId id: String) {
@@ -29,10 +31,9 @@ class HomeModel: ObservableObject {
     
     private func publishDeviceState(_ device: Device, _ room: Room) {
         let topic = "\(room.name)/\(device.id)/status"
-        let message = device.isOn ? "true" : "false"
-        mqttManager?.publish(topic: topic, with: message)
+        let message = device.isOn ? "TRUE" : "FALSE"
+        mqttManager.publish(topic: topic, with: message)
     }
-    
     
     private func loadRooms() {
         rooms = [

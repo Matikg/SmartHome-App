@@ -17,13 +17,12 @@ struct AnalyticsView: View {
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "Analysis")
         }
-        
     }
 }
 
+
 #Preview {
     AnalyticsView()
-        .environmentObject(MQTTManager(homeModel: HomeModel()))
-        .environmentObject(HomeModel())
+        .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }
 

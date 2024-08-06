@@ -5,7 +5,6 @@
 //  Created by Mateusz Grudzień on 25/04/2024.
 //
 
-import Foundation
 import SwiftUI
 
 struct Room: Identifiable {

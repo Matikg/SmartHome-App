@@ -17,13 +17,13 @@ final class MQTTManager: ObservableObject {
     var topic: String!
     var username: String!
     var password: String!
-    var homeModel: HomeModel
     
+    // Tutaj moze byc currentValueSubject
     @Published var currentAppState = MQTTAppState()
+    
     private var anyCancellable: AnyCancellable?
     
-    init(homeModel: HomeModel) {
-        self.homeModel = homeModel
+    init() {
         // Workaround to support nested Observables, without this code changes to state is not propagated
         anyCancellable = currentAppState.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
@@ -32,7 +32,7 @@ final class MQTTManager: ObservableObject {
     
     
     func initializeMQTT(host: String, identifier: String, username: String? = nil, password: String? = nil) {
-        // If any previous instance exists then clean it
+        // Clean any previous MQTT connection
         if mqttClient != nil {
             mqttClient = nil
         }
@@ -40,20 +40,21 @@ final class MQTTManager: ObservableObject {
         self.host = host
         self.username = username
         self.password = password
+        
         let clientID = "CocoaMQTT-\(identifier)-" + String(ProcessInfo().processIdentifier)
         
-        // TODO: Guard
         mqttClient = CocoaMQTT(clientID: clientID, host: host, port: 1883)
-        // If a server has username and password, pass it here
+        
+        // Setting up username and password if they exist
         if let finalusername = self.username, let finalpassword = self.password {
             mqttClient?.username = finalusername
             mqttClient?.password = finalpassword
         }
+        // Additional setup
         mqttClient?.willMessage = CocoaMQTTMessage(topic: "/will", string: "dieout")
         mqttClient?.keepAlive = 60
         mqttClient?.delegate = self
     }
-    
     
     func connect() {
         if let success = mqttClient?.connect(), success {
@@ -62,7 +63,6 @@ final class MQTTManager: ObservableObject {
             currentAppState.setAppConnectionState(state: .disconnected)
         }
     }
-    
     
     func subscribe(topic: String) {
         self.topic = topic
@@ -79,51 +79,39 @@ final class MQTTManager: ObservableObject {
         mqttClient?.publish(topic, withString: message, qos: .qos1)
     }
     
-    
     func disconnect() {
         mqttClient?.disconnect()
     }
-    
     
     func unSubscribe(topic: String) {
         mqttClient?.unsubscribe(topic)
     }
     
-    
     func unSubscribeFromCurrentTopic() {
         mqttClient?.unsubscribe(topic)
     }
-    
     
     func currentHost() -> String? {
         return host
     }
     
-    
-    func isSubscribed() -> Bool {
-        return currentAppState.appConnectionState.isSubscribed
-    }
-    
-    
     func isConnected() -> Bool {
         return currentAppState.appConnectionState.isConnected
     }
-    
     
     func connectionStateMessage() -> String {
         return currentAppState.appConnectionState.description
     }
 }
 
+// MARK: - MQTT Delegates
+
 extension MQTTManager: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
-        currentAppState.setAppConnectionState(state: .connectedSubscribed)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopics topics: [String]) {
-        currentAppState.setAppConnectionState(state: .connectedUnSubscribed)
-        currentAppState.clearData()
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
@@ -141,22 +129,22 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-//        currentAppState.setReceivedMessage(text: message.string.description)
-        guard let msgString = message.string else { return }
+        //        currentAppState.setReceivedMessage(text: message.string.description)
+//        guard let msgString = message.string else { return }
         
-        switch message.topic {
-        case "master/temperature":
-            DispatchQueue.main.async {
-                self.homeModel.temperature = msgString
-            }
-        default:
-            print("Received message for an unhandled topic")
-        }
+//        switch message.topic {
+//        case "master/temperature":
+////            DispatchQueue.main.async {
+////                self.homeModel.temperature = msgString
+////            }
+//            
+//            //currentTemperatureSubject
+//        default:
+//            print("Received message for an unhandled topic")
+//        }
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
-        currentAppState.setAppConnectionState(state: .connectedUnSubscribed)
-        currentAppState.clearData()
     }
     
     func mqttDidPing(_ mqtt: CocoaMQTT) {
@@ -167,6 +155,8 @@ extension MQTTManager: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         currentAppState.setAppConnectionState(state: .disconnected)
+        
+        // currentValueSubject.send(.disconnected)
     }
 }
 

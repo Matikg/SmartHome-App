@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct DeviceTypePicker: View {
-    
     @Binding var currentDeviceType: DeviceType?
     
     var body: some View {
-        
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 Button("All") {
@@ -24,7 +22,7 @@ struct DeviceTypePicker: View {
                     Button {
                         currentDeviceType = type
                     } label: {
-                            Image(type.image)
+                        Image(type.image)
                             .resizable()
                             .scaledToFit()
                     }

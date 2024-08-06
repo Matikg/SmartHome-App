@@ -11,7 +11,7 @@ import SwiftUI
 struct ToolbarWithSettings: ViewModifier {
     @Binding var showingSettings: Bool
     let title: String
-
+    
     func body(content: Content) -> some View {
         content
             .navigationTitle(title)

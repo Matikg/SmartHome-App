@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DeviceListView: View {
-    
     @EnvironmentObject var homeModel: HomeModel
     @State private var showingSettings = false
     @State private var currentDeviceType: DeviceType?
@@ -28,7 +27,7 @@ struct DeviceListView: View {
                         }
                         .padding()
                     
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         ForEach(filteredRooms()) { room in
                             // Display the room name outside of the grid
                             HStack {
@@ -77,8 +76,7 @@ struct DeviceListView: View {
 
 #Preview {
     DeviceListView()
-        .environmentObject(MQTTManager(homeModel: HomeModel()))
-        .environmentObject(HomeModel())
+        .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }
 
 

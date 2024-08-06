@@ -9,53 +9,43 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var mqttManager: MQTTManager
-    @State private var host: String = "192.168.22.112"
-    @State private var identifier: String = "iOS Device"
-    @State private var topic: String = ""
-    @State private var message: String = ""
-    @State private var username: String = ""
-    @State private var password: String = ""
-
+    @EnvironmentObject var viewModel: SettingsViewModel
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("MQTT Connection")) {
-                    TextField("Host", text: $host)
-                    TextField("Client Identifier", text: $identifier)
-                    TextField("Username", text: $username)
-                    TextField("Password", text: $password)
+                    TextField("Host", text: $viewModel.host)
+                    TextField("Client Identifier", text: $viewModel.identifier)
+                    TextField("Username", text: $viewModel.username)
+                    TextField("Password", text: $viewModel.password)
                     Button("Connect") {
-                        mqttManager.initializeMQTT(host: host, identifier: identifier, username: "BarMat", password: "test")
-                        mqttManager.connect()
+                        viewModel.initialize()
+                        viewModel.connect()
                     }
                     Button("Disconnect") {
-                        mqttManager.disconnect()
+                        viewModel.disconnect()
                     }
                 }
                 
-                Section(header: Text("Messaging")) {
-                    TextField("Topic", text: $topic)
-                    TextField("Message", text: $message)
-                    Button("Publish Message") {
-                        mqttManager.publish(topic: topic, with: message)
-                    }
-                    Button("Subscribe") {
-                        mqttManager.subscribe(topic: topic)
-                    }
-                    Button("Unsubscribe") {
-                        mqttManager.unSubscribeFromCurrentTopic()
-                    }
-                }
+//                Section(header: Text("Messaging")) {
+//                    TextField("Topic", text: $viewModel.topic)
+//                    TextField("Message", text: $viewModel.message)
+//                    Button("Publish Message") {
+//                        mqttManager.publish(topic: topic, with: message)
+//                    }
+//                    Button("Subscribe") {
+//                        mqttManager.subscribe(topic: topic)
+//                    }
+//                    Button("Unsubscribe") {
+//                        mqttManager.unSubscribeFromCurrentTopic()
+//                    }
+//                }
                 
-                Section {
-                    if mqttManager.isSubscribed() {
-                        Text("Subscribed to topic: \(mqttManager.topic ?? "Unknown")")
-                    }
-                    Text("Received message: \(mqttManager.currentAppState.receivedMessage)")
-                    Text(mqttManager.connectionStateMessage())
-                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
-                }
+//                Section {
+//                    Text(mqttManager.connectionStateMessage())
+//                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
+//                }
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -73,7 +63,7 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .environmentObject(MQTTManager(homeModel: HomeModel()))
+        .environmentObject(SettingsViewModel(mqttManager: MQTTManager()))
 }
 
 

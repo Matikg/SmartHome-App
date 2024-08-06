@@ -9,42 +9,97 @@ import SwiftUI
 
 struct HomeView: View {
     @State var showingSettings = false
-    @EnvironmentObject var mqttManager: MQTTManager
     @EnvironmentObject var homeModel: HomeModel
+    @State private var temp = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     
-                    LazyHStack {
+                    LazyHStack(spacing: 10) {
+                        // Tutaj dodac frame na wysokosc
+                        HStack {
+                            Image("thermostat")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Climate")
+                                    .bold()
+                                Text("20 °C")
+                            }
+                        }
+                        .padding(10)
+                        .background(Capsule().fill(Color.black.opacity(0.5)))
+                        .foregroundStyle(.white)
                         
                         HStack {
-                                Image("thermostat")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                
-                                VStack(alignment: .leading) {
-                                    Text("Climate")
-                                        .bold()
-                                    Text("\(homeModel.temperature) C")
-                                }
+                            Image("power")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Energy")
+                                    .bold()
+                                Text("112.6 kWh")
                             }
-                            .padding(10)
-                            .background(Capsule().fill(Color.black.opacity(0.5)))
-                            .foregroundStyle(.white)
+                        }
+                        .padding(10)
+                        .background(Capsule().fill(Color.black.opacity(0.5)))
+                        .foregroundStyle(.white)
+                        
+                        HStack {
+                            Image("light-bulb")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Lights")
+                                    .bold()
+                                Text("6 On")
+                            }
+                        }
+                        .padding(10)
+                        .background(Capsule().fill(Color.black.opacity(0.5)))
+                        .foregroundStyle(.white)
+                        
+                        HStack {
+                            Image("lock")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Security")
+                                    .bold()
+                                Text("6 Locked")
+                            }
+                        }
+                        .padding(10)
+                        .background(Capsule().fill(Color.black.opacity(0.5)))
+                        .foregroundStyle(.white)
                     }
-                    .padding(.horizontal)
+                }
+                .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 10) {
+                        Rectangle()
+                            .frame(width: 150, height: 80)
+                        Rectangle()
+                            .frame(width: 150, height: 80)
+                        Rectangle()
+                            .frame(width: 150, height: 80)
+                    }
                 }
             }
-            .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
+            .padding(.horizontal)
         }
     }
 }
 
+
 #Preview {
     HomeView()
-        .environmentObject(MQTTManager(homeModel: HomeModel()))
-        .environmentObject(HomeModel())
+        .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }

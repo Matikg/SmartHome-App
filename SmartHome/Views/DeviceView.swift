@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct DeviceView: View {
-    
     @EnvironmentObject var homeModel: HomeModel
     var device: Device
-
+    
     var body: some View {
         HStack {
-
             Image(device.photo)
                 .resizable()
                 .frame(width: 50, height: 50)
@@ -40,6 +38,6 @@ struct DeviceView: View {
 
 
 #Preview {
-    DeviceView(device: HomeModel().rooms[1].devices[1])
+    DeviceView(device: HomeModel(mqttManager: MQTTManager()).rooms[1].devices[1])
 }
 
