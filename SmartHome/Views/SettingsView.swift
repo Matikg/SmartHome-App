@@ -28,24 +28,10 @@ struct SettingsView: View {
                     }
                 }
                 
-//                Section(header: Text("Messaging")) {
-//                    TextField("Topic", text: $viewModel.topic)
-//                    TextField("Message", text: $viewModel.message)
-//                    Button("Publish Message") {
-//                        mqttManager.publish(topic: topic, with: message)
-//                    }
-//                    Button("Subscribe") {
-//                        mqttManager.subscribe(topic: topic)
-//                    }
-//                    Button("Unsubscribe") {
-//                        mqttManager.unSubscribeFromCurrentTopic()
-//                    }
-//                }
-                
-//                Section {
-//                    Text(mqttManager.connectionStateMessage())
-//                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
-//                }
+                //                Section {
+                //                    Text(mqttManager.connectionStateMessage())
+                //                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
+                //                }
             }
             .navigationTitle("Settings")
             .toolbar {
@@ -58,7 +44,6 @@ struct SettingsView: View {
         }
     }
 }
-
 
 
 #Preview {

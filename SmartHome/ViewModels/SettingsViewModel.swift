@@ -10,10 +10,10 @@ import Foundation
 class SettingsViewModel: ObservableObject {
     private let mqttManager: MQTTManager
     
-    @Published var host: String = "192.168.0.12"
+    @Published var host: String = "192.168"
     @Published var identifier: String = "iOS Device"
-    @Published var username: String = "BarMat"
-    @Published var password: String = "test"
+    @Published var username: String = ""
+    @Published var password: String = ""
     
     init(mqttManager: MQTTManager) {
         self.mqttManager = mqttManager
