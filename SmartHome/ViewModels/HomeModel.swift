@@ -7,16 +7,31 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 final class HomeModel: ObservableObject {
     @Published var rooms = [Room]()
-    @Published var temperature: String = "20"
+//    @Published var temperature: String = "20"
     private let mqttManager: MQTTManager
-    
+    private var cancellables = Set<AnyCancellable>()
+    @Published var temperature = ""
+    @Published var power = ""
     init(mqttManager: MQTTManager) {
         self.mqttManager = mqttManager
         loadRooms()
-        // mqttManager.currentValueSubject.sink{}
+         mqttManager.topicSubject
+            .sink { [weak self] topic in
+                guard let self else { return }
+                switch topic {
+                case .temperature(let value):
+                    self.temperature = value
+                case .power(let value):
+                    self.power = value
+                case .unknown:
+                    break
+                }
+            }
+            .store(in: &cancellables)
         
     }
     

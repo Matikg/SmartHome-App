@@ -7,21 +7,10 @@
 
 import Foundation
 
-enum MQTTAppConnectionState {
-    case connected
-    case disconnected
-    case connecting
-    
-    var description: String {
-        switch self {
-        case .connected:
-            return "Connected"
-        case .disconnected:
-            return "Disconnected"
-        case .connecting:
-            return "Connecting"
-        }
-    }
+enum MQTTAppConnectionState: String {
+    case connected = "Connected"
+    case disconnected = "Disconnected"
+    case connecting = "Connecting"
     
     var isConnected: Bool {
         switch self {
@@ -32,15 +21,3 @@ enum MQTTAppConnectionState {
         }
     }
 }
-
-final class MQTTAppState: ObservableObject {
-    @Published var appConnectionState: MQTTAppConnectionState = .disconnected
-    
-    func setAppConnectionState(state: MQTTAppConnectionState) {
-        self.appConnectionState = state
-    }
-}
-
-
-
-

@@ -5,12 +5,11 @@
 //  Created by Mateusz Grudzień on 25/04/2024.
 //
 
-import Foundation
 import CocoaMQTT
 import Combine
 import SwiftUI
 
-final class MQTTManager: ObservableObject {
+final class MQTTManager {
     var mqttClient: CocoaMQTT?
     var identifier: String!
     var host: String!
@@ -19,17 +18,8 @@ final class MQTTManager: ObservableObject {
     var password: String!
     
     // Tutaj moze byc currentValueSubject
-    @Published var currentAppState = MQTTAppState()
-    
-    private var anyCancellable: AnyCancellable?
-    
-    init() {
-        // Workaround to support nested Observables, without this code changes to state is not propagated
-        anyCancellable = currentAppState.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
-    }
-    
+    var serverConnectionState = CurrentValueSubject<MQTTAppConnectionState, Never>(.disconnected)
+    var topicSubject = PassthroughSubject<Topic, Never>()
     
     func initializeMQTT(host: String, identifier: String, username: String? = nil, password: String? = nil) {
         // Clean any previous MQTT connection
@@ -58,9 +48,9 @@ final class MQTTManager: ObservableObject {
     
     func connect() {
         if let success = mqttClient?.connect(), success {
-            currentAppState.setAppConnectionState(state: .connecting)
+            serverConnectionState.send(.connecting)
         } else {
-            currentAppState.setAppConnectionState(state: .disconnected)
+            serverConnectionState.send(.connected)
         }
     }
     
@@ -95,13 +85,10 @@ final class MQTTManager: ObservableObject {
         return host
     }
     
-    func isConnected() -> Bool {
-        return currentAppState.appConnectionState.isConnected
-    }
+//    func isConnected() -> Bool {
+//
+//    }
     
-    func connectionStateMessage() -> String {
-        return currentAppState.appConnectionState.description
-    }
 }
 
 // MARK: - MQTT Delegates
@@ -116,8 +103,7 @@ extension MQTTManager: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         if ack == .accept {
-            currentAppState.setAppConnectionState(state: .connected)
-            self.subscribe(topic: "master/temperature")
+            serverConnectionState.send(.connected)
             self.multipleSubscribe(topics: ["master/temperature"])
         }
     }
@@ -130,18 +116,10 @@ extension MQTTManager: CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
         //        currentAppState.setReceivedMessage(text: message.string.description)
-//        guard let msgString = message.string else { return }
         
-//        switch message.topic {
-//        case "master/temperature":
-////            DispatchQueue.main.async {
-////                self.homeModel.temperature = msgString
-////            }
-//            
-//            //currentTemperatureSubject
-//        default:
-//            print("Received message for an unhandled topic")
-//        }
+        topicSubject.send(Topic(message: message))
+        
+          
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
@@ -154,10 +132,26 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        currentAppState.setAppConnectionState(state: .disconnected)
-        
-        // currentValueSubject.send(.disconnected)
+        serverConnectionState.send(.disconnected)
     }
 }
 
-
+enum Topic {
+    case temperature(String)
+    case power(String)
+    case unknown
+    
+    init(message: CocoaMQTTMessage) {
+        
+        switch message.topic {
+        case "master/temperature":
+            self = .temperature(message.string ?? "")
+            
+        case "master/power":
+            self = .power(message.string ?? "")
+            
+        default:
+            self = .unknown
+        }
+    }
+}

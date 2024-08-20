@@ -18,7 +18,7 @@ struct SettingsView: View {
                     TextField("Host", text: $viewModel.host)
                     TextField("Client Identifier", text: $viewModel.identifier)
                     TextField("Username", text: $viewModel.username)
-                    TextField("Password", text: $viewModel.password)
+                    SecureField("Password", text: $viewModel.password)
                     Button("Connect") {
                         viewModel.initialize()
                         viewModel.connect()
@@ -28,10 +28,10 @@ struct SettingsView: View {
                     }
                 }
                 
-                //                Section {
-                //                    Text(mqttManager.connectionStateMessage())
-                //                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
-                //                }
+                Section {
+                    Text(viewModel.serverState.rawValue)
+//                        .foregroundColor(mqttManager.isConnected() ? .green : .red)
+                }
             }
             .navigationTitle("Settings")
             .toolbar {
