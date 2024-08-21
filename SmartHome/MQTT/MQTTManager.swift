@@ -83,7 +83,6 @@ final class MQTTManager {
     func currentHost() -> String? {
         return host
     }
-    
 }
 
 // MARK: - MQTT Delegates
@@ -110,8 +109,6 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-        //        currentAppState.setReceivedMessage(text: message.string.description)
-        
         topicSubject.send(Topic(message: message))
     }
     
@@ -137,6 +134,7 @@ enum Topic {
     init(message: CocoaMQTTMessage) {
         
         switch message.topic {
+            
         case "master/temperature":
             self = .temperature(message.string ?? "")
             

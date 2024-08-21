@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7B8B92513AFB39D9D61841A0 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1504F04492EDD7B0F5435777 /* Pods_SmartHome.framework */; };
 		E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84FA8932C753A9B00594AE5 /* IndicatorView.swift */; };
+		E84FA8962C76542500594AE5 /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84FA8952C76542500594AE5 /* HomeScene.swift */; };
+		E84FA8982C76577400594AE5 /* HomeSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84FA8972C76577400594AE5 /* HomeSceneView.swift */; };
 		E86436562C5FB3E40029858F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86436552C5FB3E40029858F /* SettingsViewModel.swift */; };
 		E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */; };
 		E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */; };
@@ -32,6 +34,8 @@
 		1504F04492EDD7B0F5435777 /* Pods_SmartHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C38D5B484B7F2442FC0F0F /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		E84FA8932C753A9B00594AE5 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		E84FA8952C76542500594AE5 /* HomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		E84FA8972C76577400594AE5 /* HomeSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneView.swift; sourceTree = "<group>"; };
 		E86436552C5FB3E40029858F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E8811B592BDA4DBA000FC08D /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeApp.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				E8811B722BDA6C38000FC08D /* Room.swift */,
+				E84FA8952C76542500594AE5 /* HomeScene.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
 				E8811B822BDA8351000FC08D /* DeviceListView.swift */,
 				E84FA8932C753A9B00594AE5 /* IndicatorView.swift */,
+				E84FA8972C76577400594AE5 /* HomeSceneView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */,
 				E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */,
 				E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */,
+				E84FA8962C76542500594AE5 /* HomeScene.swift in Sources */,
 				E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */,
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
@@ -295,6 +302,7 @@
 				E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */,
 				E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */,
 				E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */,
+				E84FA8982C76577400594AE5 /* HomeSceneView.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
 				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,

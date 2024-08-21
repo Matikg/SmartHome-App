@@ -17,10 +17,29 @@ struct SettingsView: View {
             VStack {
                 Form {
                     Section(header: Text("MQTT Connection")) {
-                        TextField("Host", text: $viewModel.host)
-                        TextField("Client Identifier", text: $viewModel.identifier)
-                        TextField("Username", text: $viewModel.username)
-                        SecureField("Password", text: $viewModel.password)
+                        HStack {
+                            Image(systemName: "wifi.router")
+                                .frame(width: 30)
+                            TextField("Host", text: $viewModel.host)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "person.text.rectangle")
+                                .frame(width: 30)
+                            TextField("Client Identifier", text: $viewModel.identifier)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "person")
+                                .frame(width: 30)
+                            TextField("Username", text: $viewModel.username)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "key")
+                                .frame(width: 30)
+                            SecureField("Password", text: $viewModel.password)
+                        }
                         
                         Button("Connect") {
                             viewModel.connect()
@@ -34,8 +53,16 @@ struct SettingsView: View {
                     }
                     
                     Section(header: Text("Preferences")) {
-                        Toggle("Dark Mode", isOn: $isDarkMode)
-                        Toggle("Auto connect", isOn: $autoConnect)
+                        HStack {
+                            Image(systemName: "pencil")
+                                .frame(width: 30)
+                            Toggle("Dark Mode", isOn: $isDarkMode)
+                        }
+                        HStack {
+                            Image(systemName: "autostartstop")
+                                .frame(width: 30)
+                            Toggle("Auto connect", isOn: $autoConnect)
+                        }
                     }
                     
                     HStack(alignment: .center) {

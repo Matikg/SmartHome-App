@@ -12,7 +12,7 @@ class SettingsViewModel: ObservableObject {
     private let mqttManager: MQTTManager
     
     @Published var host: String = "192.168.0.12"
-    @Published var identifier: String = "iOS Device"
+    @Published var identifier: String = ""
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var serverState: MQTTAppConnectionState = .disconnected

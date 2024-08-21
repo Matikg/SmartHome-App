@@ -13,7 +13,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(alignment: .leading) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 10) {
                         
@@ -29,24 +29,31 @@ struct HomeView: View {
                         IndicatorView(image: "lock", label: "Security",
                                       value: homeModel.numberOfDevicesOn(ofType: .lock) == 0 ? "Unlocked" : "\(homeModel.numberOfDevicesOn(ofType: .lock)) Locked")
                     }
+                    .frame(height: 100)
                 }
-                .frame(height: 100)
+                
+                Text("Scenes")
+                    .font(.headline)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 10) {
-                        Rectangle()
-                            .frame(width: 150, height: 80)
-                        Rectangle()
-                            .frame(width: 150, height: 80)
-                        Rectangle()
-                            .frame(width: 150, height: 80)
+                        ForEach(homeModel.scenes.indices, id: \.self) { index in
+                            let scene = homeModel.scenes[index]
+                            HomeSceneView(scene: scene, isSelected: scene == homeModel.selectedScene,
+                                          onSelect: {
+                                if homeModel.selectedScene != scene {
+                                    homeModel.selectedScene = scene
+                                    scene.action() // Trigger the scene's action
+                                } else {
+                                    // If the scene is already selected, just deselect it
+                                    homeModel.selectedScene = nil
+                                }
+                            })
+                            
+                        }
                     }
-                    .foregroundStyle(.gray)
+                    .frame(height: 100)
                 }
-                
-                
-                
-                
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
             .padding(.horizontal)

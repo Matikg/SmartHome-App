@@ -11,8 +11,10 @@ import Combine
 
 final class HomeModel: ObservableObject {
     @Published var rooms = [Room]()
+    @Published var scenes = [HomeScene]()
     @Published var temperature = "20.0"
     @Published var power = "25.3"
+    @Published var selectedScene: HomeScene? = nil
     
     private let mqttManager: MQTTManager
     private var cancellables = Set<AnyCancellable>()
@@ -20,6 +22,7 @@ final class HomeModel: ObservableObject {
     init(mqttManager: MQTTManager) {
         self.mqttManager = mqttManager
         loadRooms()
+        loadScenes()
         mqttManager.topicSubject
             .sink { [weak self] topic in
                 guard let self else { return }
@@ -93,6 +96,24 @@ final class HomeModel: ObservableObject {
                 Device(id: "601", name: "Light", type: .light, photo: "light-bulb", isOn: false),
                 Device(id: "621", name: "Lock", type: .lock, photo: "lock", isOn: false)])
         ]
+    }
+    
+    private func loadScenes() {
+        scenes = [
+            HomeScene(label: "Morning", image: "morning-scene", action: {
+                print("test1")
+            }),
+            HomeScene(label: "Evening", image: "evening-scene", action: {
+                print("test2")
+            }),
+            HomeScene(label: "Night", image: "night-scene", action: {
+                
+            })
+        ]
+    }
+    
+    func triggerMorningScene() {
+        mqttManager.publish(topic: "home/scene/morning", with: "TRUE")
     }
 }
 
