@@ -10,7 +10,7 @@ import Foundation
 enum MQTTAppConnectionState: String {
     case connected = "Connected"
     case disconnected = "Disconnected"
-    case connecting = "Connecting"
+    case connecting = "Connecting..."
     
     var isConnected: Bool {
         switch self {

@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct SmartHomeApp: App {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
     let homeModel: HomeModel
     let settingsViewModel: SettingsViewModel
     init() {
@@ -20,6 +22,7 @@ struct SmartHomeApp: App {
     var body: some Scene {
         WindowGroup {
             ToolBarView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
                 .environmentObject(homeModel)
                 .environmentObject(settingsViewModel)
         }

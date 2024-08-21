@@ -29,11 +29,8 @@ class SettingsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func initialize() {
-        mqttManager.initializeMQTT(host: host, identifier: identifier, username: username, password: password)
-    }
-    
     func connect() {
+        mqttManager.initializeMQTT(host: host, identifier: identifier, username: username, password: password)
         mqttManager.connect()
     }
     

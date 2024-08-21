@@ -17,7 +17,6 @@ final class MQTTManager {
     var username: String!
     var password: String!
     
-    // Tutaj moze byc currentValueSubject
     var serverConnectionState = CurrentValueSubject<MQTTAppConnectionState, Never>(.disconnected)
     var topicSubject = PassthroughSubject<Topic, Never>()
     
@@ -85,10 +84,6 @@ final class MQTTManager {
         return host
     }
     
-//    func isConnected() -> Bool {
-//
-//    }
-    
 }
 
 // MARK: - MQTT Delegates
@@ -104,7 +99,7 @@ extension MQTTManager: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         if ack == .accept {
             serverConnectionState.send(.connected)
-            self.multipleSubscribe(topics: ["master/temperature"])
+            self.multipleSubscribe(topics: ["master/temperature", "master/power"])
         }
     }
     
@@ -118,8 +113,6 @@ extension MQTTManager: CocoaMQTTDelegate {
         //        currentAppState.setReceivedMessage(text: message.string.description)
         
         topicSubject.send(Topic(message: message))
-        
-          
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B8B92513AFB39D9D61841A0 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1504F04492EDD7B0F5435777 /* Pods_SmartHome.framework */; };
+		E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84FA8932C753A9B00594AE5 /* IndicatorView.swift */; };
 		E86436562C5FB3E40029858F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86436552C5FB3E40029858F /* SettingsViewModel.swift */; };
 		E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */; };
 		E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */; };
@@ -30,6 +31,7 @@
 		0EDB4EDB96F07FB54DEFE236 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		1504F04492EDD7B0F5435777 /* Pods_SmartHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C38D5B484B7F2442FC0F0F /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
+		E84FA8932C753A9B00594AE5 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		E86436552C5FB3E40029858F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E8811B592BDA4DBA000FC08D /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeApp.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
 				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
 				E8811B822BDA8351000FC08D /* DeviceListView.swift */,
+				E84FA8932C753A9B00594AE5 /* IndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */,
 				E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */,
 				E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */,
+				E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */,
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
 				E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */,

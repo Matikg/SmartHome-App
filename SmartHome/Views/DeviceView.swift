@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DeviceView: View {
     @EnvironmentObject var homeModel: HomeModel
-    var device: Device
+    let device: Device
     
     var body: some View {
         HStack {

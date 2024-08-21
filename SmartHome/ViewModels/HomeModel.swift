@@ -11,15 +11,16 @@ import Combine
 
 final class HomeModel: ObservableObject {
     @Published var rooms = [Room]()
-//    @Published var temperature: String = "20"
+    @Published var temperature = "20.0"
+    @Published var power = "25.3"
+    
     private let mqttManager: MQTTManager
     private var cancellables = Set<AnyCancellable>()
-    @Published var temperature = ""
-    @Published var power = ""
+    
     init(mqttManager: MQTTManager) {
         self.mqttManager = mqttManager
         loadRooms()
-         mqttManager.topicSubject
+        mqttManager.topicSubject
             .sink { [weak self] topic in
                 guard let self else { return }
                 switch topic {
@@ -32,7 +33,6 @@ final class HomeModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-        
     }
     
     func toggleDevice(withId id: String) {
@@ -48,6 +48,12 @@ final class HomeModel: ObservableObject {
         let topic = "\(room.name)/\(device.id)/status"
         let message = device.isOn ? "TRUE" : "FALSE"
         mqttManager.publish(topic: topic, with: message)
+    }
+    
+    func numberOfDevicesOn(ofType type: DeviceType) -> Int {
+        let devicesOn = rooms.flatMap { $0.devices }
+            .filter { $0.type == type && $0.isOn }
+        return devicesOn.count
     }
     
     private func loadRooms() {
