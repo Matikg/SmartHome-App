@@ -32,28 +32,59 @@ struct HomeView: View {
                     .frame(height: 100)
                 }
                 
-                Text("Scenes")
-                    .font(.headline)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Scenes")
+                        .font(.headline)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 10) {
+                            ForEach(homeModel.scenes.indices, id: \.self) { index in
+                                let scene = homeModel.scenes[index]
+                                HomeSceneView(scene: scene, isSelected: scene == homeModel.selectedScene,
+                                              onSelect: {
+                                    if homeModel.selectedScene != scene {
+                                        homeModel.selectedScene = scene
+                                        scene.action() // Trigger the scene's action
+                                    } else {
+                                        // If the scene is already selected, just deselect it
+                                        homeModel.selectedScene = nil
+                                    }
+                                })
+                            }
+                        }
+                        .frame(height: 100)
+                    }
+                }
                 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 10) {
-                        ForEach(homeModel.scenes.indices, id: \.self) { index in
-                            let scene = homeModel.scenes[index]
-                            HomeSceneView(scene: scene, isSelected: scene == homeModel.selectedScene,
-                                          onSelect: {
-                                if homeModel.selectedScene != scene {
-                                    homeModel.selectedScene = scene
-                                    scene.action() // Trigger the scene's action
-                                } else {
-                                    // If the scene is already selected, just deselect it
-                                    homeModel.selectedScene = nil
-                                }
-                            })
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Controls")
+                        .font(.headline)
+                    
+                    Grid(horizontalSpacing: 10, verticalSpacing: 10) {
+                        GridRow {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .shadow(radius: 5)
                             
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .shadow(radius: 5)
+                        }
+                        GridRow {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .shadow(radius: 5)
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.gray)
+                                .shadow(radius: 5)
                         }
                     }
-                    .frame(height: 100)
+                    .frame(height: 400)
                 }
+                
+                Spacer()
+                
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
             .padding(.horizontal)

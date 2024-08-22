@@ -19,7 +19,7 @@ struct IndicatorView: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 5) {
             Image(image)
                 .resizable()
                 .frame(width: 40, height: 40)
@@ -30,7 +30,8 @@ struct IndicatorView: View {
                 Text(value)
             }
         }
-        .padding(10)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 15)
         .background(Capsule().fill(Color.gray))
         .foregroundStyle(.white)
     }

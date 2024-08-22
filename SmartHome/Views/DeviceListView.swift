@@ -15,7 +15,7 @@ struct DeviceListView: View {
     @State private var scrollToTopTrigger = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollViewReader { scrollProxy in
                 
                 VStack {
@@ -39,7 +39,6 @@ struct DeviceListView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading)
                             
-                            
                             // LazyVGrid for devices within the room
                             LazyVGrid(columns: Array(repeating: GridItem(), count: 1), spacing: 10) {
                                 ForEach(filteredDevices(for: room)) { device in
@@ -50,6 +49,7 @@ struct DeviceListView: View {
                         }
                         .padding()
                     }
+                    .padding(.top, -20)
                 }
                 .settingsToolbar(showingSettings: $showingSettings, title: "Devices")
             }

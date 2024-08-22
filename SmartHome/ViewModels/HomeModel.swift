@@ -100,20 +100,28 @@ final class HomeModel: ObservableObject {
     
     private func loadScenes() {
         scenes = [
-            HomeScene(label: "Morning", image: "morning-scene", action: {
-                print("test1")
+            HomeScene(label: "Morning", image: "morning-scene", action: { [weak self] in
+                self?.triggerMorningScene()
             }),
-            HomeScene(label: "Evening", image: "evening-scene", action: {
-                print("test2")
+            HomeScene(label: "Evening", image: "evening-scene", action: { [weak self] in
+                self?.triggerEveningScene()
             }),
-            HomeScene(label: "Night", image: "night-scene", action: {
-                
+            HomeScene(label: "Night", image: "night-scene", action: { [weak self] in
+                self?.triggerNightScene()
             })
         ]
     }
     
     func triggerMorningScene() {
         mqttManager.publish(topic: "home/scene/morning", with: "TRUE")
+    }
+    
+    func triggerEveningScene() {
+        mqttManager.publish(topic: "home/scene/evening", with: "TRUE")
+    }
+    
+    func triggerNightScene() {
+        mqttManager.publish(topic: "home/scene/night", with: "TRUE")
     }
 }
 

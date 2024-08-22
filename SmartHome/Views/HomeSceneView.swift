@@ -28,11 +28,11 @@ struct HomeSceneView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)
                     .padding(.leading, 5)
-                Spacer()
+                
                 Text(scene.label)
                     .font(.title3)
                     .bold()
-                Spacer()
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .frame(width: 150, height: 80)
             .background(isSelected ? Color.blue : Color.gray)
@@ -45,6 +45,5 @@ struct HomeSceneView: View {
 
 #Preview {
     HomeSceneView(scene: HomeScene(label: "Night", image: "night-scene", action: {
-        
     }), isSelected: false, onSelect: { print("Scene selected") })
 }
