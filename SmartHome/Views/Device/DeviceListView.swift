@@ -12,12 +12,10 @@ struct DeviceListView: View {
     @State private var showingSettings = false
     @State private var currentDeviceType: DeviceType?
     @State private var showGrid = false
-    @State private var scrollToTopTrigger = false
     
     var body: some View {
         NavigationStack {
             ScrollViewReader { scrollProxy in
-                
                 VStack {
                     DeviceTypePicker(currentDeviceType: $currentDeviceType)
                         .onChange(of: currentDeviceType) {
@@ -29,18 +27,15 @@ struct DeviceListView: View {
                     
                     ScrollView(showsIndicators: false) {
                         ForEach(filteredRooms()) { room in
-                            // Display the room name outside of the grid
-                            HStack {
-                                Text(room.name)
-                                    .padding()
-                                    .font(.headline)
-                                    .id(0)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading)
+                            Text(room.name)
+                                .padding()
+                                .font(.headline)
+                                .id(0)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading)
                             
-                            // LazyVGrid for devices within the room
-                            LazyVGrid(columns: Array(repeating: GridItem(), count: 1), spacing: 10) {
+                            // Devices
+                            LazyVStack(spacing: 10) {
                                 ForEach(filteredDevices(for: room)) { device in
                                     DeviceView(device: device)
                                 }
@@ -55,6 +50,8 @@ struct DeviceListView: View {
             }
         }
     }
+    
+    // MARK: - Filters
     
     private func filteredRooms() -> [Room] {
         guard let type = currentDeviceType else {

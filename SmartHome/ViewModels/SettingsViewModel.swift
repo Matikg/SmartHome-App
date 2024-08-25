@@ -16,15 +16,22 @@ class SettingsViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var serverState: MQTTAppConnectionState = .disconnected
+    @Published var errorMessage: String = ""
     
     private var cancellables = Set<AnyCancellable>()
     
     init(mqttManager: MQTTManager) {
         self.mqttManager = mqttManager
+        
         mqttManager.serverConnectionState
-        // Można użyć assign
             .sink { [weak self] state in
                 self?.serverState = state
+            }
+            .store(in: &cancellables)
+        
+        mqttManager.connectionErrorMessage
+            .sink { [weak self] message in
+                self?.errorMessage = message
             }
             .store(in: &cancellables)
     }

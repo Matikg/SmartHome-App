@@ -19,6 +19,7 @@ final class MQTTManager {
     
     var serverConnectionState = CurrentValueSubject<MQTTAppConnectionState, Never>(.disconnected)
     var topicSubject = PassthroughSubject<Topic, Never>()
+    var connectionErrorMessage = PassthroughSubject<String, Never>()
     
     func initializeMQTT(host: String, identifier: String, username: String? = nil, password: String? = nil) {
         // Clean any previous MQTT connection
@@ -46,7 +47,7 @@ final class MQTTManager {
     }
     
     func connect() {
-        if let success = mqttClient?.connect(), success {
+        if let success = mqttClient?.connect(timeout: 5.0), success {
             serverConnectionState.send(.connecting)
         } else {
             serverConnectionState.send(.connected)
@@ -98,7 +99,12 @@ extension MQTTManager: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         if ack == .accept {
             serverConnectionState.send(.connected)
+            connectionErrorMessage.send("")
             self.multipleSubscribe(topics: ["master/temperature", "master/power"])
+        }
+        else {
+            let errorMessage = "Failed to connect: \(ack.description)"
+            connectionErrorMessage.send(errorMessage)
         }
     }
     

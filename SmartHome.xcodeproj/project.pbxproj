@@ -27,6 +27,7 @@
 		E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B7E2BDA81D5000FC08D /* DeviceView.swift */; };
 		E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */; };
 		E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B822BDA8351000FC08D /* DeviceListView.swift */; };
+		E8B2B92F2C7AB2CF00870110 /* QDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B92E2C7AB2CF00870110 /* QDivider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		E8811B7E2BDA81D5000FC08D /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypePicker.swift; sourceTree = "<group>"; };
 		E8811B822BDA8351000FC08D /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
+		E8B2B92E2C7AB2CF00870110 /* QDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDivider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,14 +148,11 @@
 		E8811B702BDA6C07000FC08D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E8B2B9122C79E96700870110 /* Home */,
+				E8B2B9132C79E97700870110 /* Device */,
 				E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */,
 				E8811B762BDA7E0A000FC08D /* SettingsView.swift */,
-				E8811B7A2BDA80A5000FC08D /* HomeView.swift */,
 				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
-				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
-				E8811B822BDA8351000FC08D /* DeviceListView.swift */,
-				E84FA8932C753A9B00594AE5 /* IndicatorView.swift */,
-				E84FA8972C76577400594AE5 /* HomeSceneView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,8 +171,28 @@
 			children = (
 				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
 				E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */,
+				E8B2B92E2C7AB2CF00870110 /* QDivider.swift */,
 			);
 			path = CustomStyles;
+			sourceTree = "<group>";
+		};
+		E8B2B9122C79E96700870110 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B7A2BDA80A5000FC08D /* HomeView.swift */,
+				E84FA8972C76577400594AE5 /* HomeSceneView.swift */,
+				E84FA8932C753A9B00594AE5 /* IndicatorView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E8B2B9132C79E97700870110 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B822BDA8351000FC08D /* DeviceListView.swift */,
+				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +322,7 @@
 				E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */,
 				E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */,
 				E84FA8982C76577400594AE5 /* HomeSceneView.swift in Sources */,
+				E8B2B92F2C7AB2CF00870110 /* QDivider.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
 				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,

@@ -16,6 +16,12 @@ struct SettingsView: View {
         NavigationStack {
             VStack {
                 Form {
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(.red)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    
                     Section(header: Text("MQTT Connection")) {
                         HStack {
                             Image(systemName: "wifi.router")
@@ -52,28 +58,9 @@ struct SettingsView: View {
                         .disabled(viewModel.serverState == .disconnected)
                     }
                     
-                    Section(header: Text("Preferences")) {
-                        HStack {
-                            Image(systemName: "pencil")
-                                .frame(width: 30)
-                            Toggle("Dark Mode", isOn: $isDarkMode)
-                        }
-                        HStack {
-                            Image(systemName: "autostartstop")
-                                .frame(width: 30)
-                            Toggle("Auto connect", isOn: $autoConnect)
-                        }
-                    }
+                    buildPreferencesSection(isDarkMode: $isDarkMode, autoConnect: $autoConnect)
                     
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Image(systemName: viewModel.serverState.isConnected ? "wifi" : "wifi.slash")
-                            .font(.title3)
-                        Text(viewModel.serverState.rawValue)
-                            .font(.title3)
-                        Spacer()
-                    }
-                    .foregroundColor(viewModel.serverState.isConnected ? .green : .red)
+                    buildConnectionStatus(viewModel)
                 }
             }
             .navigationTitle("Settings")
@@ -86,6 +73,35 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
+    }
+}
+
+// MARK: - View Builders
+
+private func buildConnectionStatus(_ viewModel: SettingsViewModel) -> some View {
+    HStack(alignment: .center) {
+        Spacer()
+        Image(systemName: viewModel.serverState.isConnected ? "wifi" : "wifi.slash")
+            .font(.title3)
+        Text(viewModel.serverState.rawValue)
+            .font(.title3)
+        Spacer()
+    }
+    .foregroundColor(viewModel.serverState.isConnected ? .green : .red)
+}
+
+private func buildPreferencesSection(isDarkMode: Binding<Bool>, autoConnect: Binding<Bool>) -> some View {
+    Section(header: Text("Preferences")) {
+        HStack {
+            Image(systemName: "pencil")
+                .frame(width: 30)
+            Toggle("Dark Mode", isOn: isDarkMode)
+        }
+        HStack {
+            Image(systemName: "autostartstop")
+                .frame(width: 30)
+            Toggle("Auto connect", isOn: autoConnect)
+        }
     }
 }
 

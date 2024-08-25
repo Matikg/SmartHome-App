@@ -15,10 +15,16 @@ struct DeviceView: View {
         HStack {
             Image(device.photo)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 50, height: 50)
+                .transition(.opacity)
+                .animation(.easeInOut, value: device.isOn)
+            
             Text(device.name)
                 .bold()
+            
             Spacer()
+            
             Toggle(isOn: Binding(
                 get: { device.isOn },
                 set: { newValue in

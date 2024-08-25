@@ -18,8 +18,20 @@ struct Device: Identifiable {
     var id: String
     var name: String
     var type: DeviceType
-    var photo: String
     var isOn: Bool
+    
+    var photo: String {
+        switch type {
+        case .lock:
+            return isOn ? "lock" : "unlock"
+        case .light:
+            return isOn ? "bulb-on" : "bulb-off"
+        case .socket:
+            return isOn ? "socket-on" : "socket"
+        default:
+            return type.image
+        }
+    }
 }
 
 enum DeviceType: String, CaseIterable {
@@ -28,7 +40,7 @@ enum DeviceType: String, CaseIterable {
     var image: String {
         switch self {
         case .light:
-            return "light-bulb"
+            return "bulb-off"
         case .socket:
             return "socket"
         case .lock:
