@@ -100,7 +100,9 @@ extension MQTTManager: CocoaMQTTDelegate {
         if ack == .accept {
             serverConnectionState.send(.connected)
             connectionErrorMessage.send("")
-            self.multipleSubscribe(topics: ["master/temperature", "master/power"])
+            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/temperature/log"])
+            publish(topic: "synchronize", with: "update")
+            publish(topic: "logs", with: "update")
         }
         else {
             let errorMessage = "Failed to connect: \(ack.description)"
@@ -135,6 +137,8 @@ extension MQTTManager: CocoaMQTTDelegate {
 enum Topic {
     case temperature(String)
     case power(String)
+    case tempSet(String)
+    case tempLog(String)
     case unknown
     
     init(message: CocoaMQTTMessage) {
@@ -146,6 +150,12 @@ enum Topic {
             
         case "master/power":
             self = .power(message.string ?? "")
+            
+        case "master/temperature/log":
+            self = .tempLog(message.string ?? "")
+            
+        case "master/temperature/set":
+            self = .tempSet(message.string ?? "")
             
         default:
             self = .unknown

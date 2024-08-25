@@ -32,7 +32,7 @@ struct IndicatorView: View {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 15)
-        .background(Capsule().fill(Color.gray))
+        .background(Capsule().fill(Color.gray.opacity(0.8)))
         .foregroundStyle(.white)
     }
 }

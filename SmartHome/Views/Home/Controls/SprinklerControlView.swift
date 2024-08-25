@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct SprinklerControlView: View {
+    @Binding var isSprinklerOn: Bool
+    
     var body: some View {
         ControlGridCell(image: "sprinkler", label: "Sprinkler") {
-            EmptyView()
+            Toggle(isOn: $isSprinklerOn) {
+                
+            }
+            Link("NodeRed", destination: URL(string: "https://192.168.0.12:1881")!)
+            .labelsHidden()
+            .toggleStyle(SwitchToggleStyle(tint: .blue))
         }
     }
 }
 
 #Preview {
-    SprinklerControlView()
+    SprinklerControlView(isSprinklerOn: .constant(false))
         .frame(width: 200, height: 200)
 }

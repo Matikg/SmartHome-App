@@ -22,7 +22,7 @@ struct SettingsView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                     
-                    Section(header: Text("MQTT Connection")) {
+                    Section(header: Text("MQTT Connection"), footer: Text("Ensure your MQTT broker settings are correct before connecting. Use a unique client identifier and double-check your username and password for secure access.")) {
                         HStack {
                             Image(systemName: "wifi.router")
                                 .frame(width: 30)
@@ -61,6 +61,7 @@ struct SettingsView: View {
                     buildPreferencesSection(isDarkMode: $isDarkMode, autoConnect: $autoConnect)
                     
                     buildConnectionStatus(viewModel)
+                    
                 }
             }
             .navigationTitle("Settings")
@@ -91,7 +92,7 @@ private func buildConnectionStatus(_ viewModel: SettingsViewModel) -> some View 
 }
 
 private func buildPreferencesSection(isDarkMode: Binding<Bool>, autoConnect: Binding<Bool>) -> some View {
-    Section(header: Text("Preferences")) {
+    Section(header: Text("Preferences"), footer: Text("Enable Dark Mode for a more comfortable viewing experience in low light. Auto connect will automatically establish a connection when the app launches.")) {
         HStack {
             Image(systemName: "pencil")
                 .frame(width: 30)

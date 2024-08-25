@@ -35,7 +35,7 @@ struct HomeSceneView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .frame(width: 150, height: 80)
-            .background(isSelected ? Color.blue : Color.gray)
+            .background(isSelected ? Color.blue : Color.gray.opacity(0.8))
             .cornerRadius(10)
             .foregroundColor(.white)
             .shadow(radius: 5)

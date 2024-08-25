@@ -9,11 +9,17 @@ import SwiftUI
 
 struct AnalyticsView: View {
     @State private var showingSettings = false
+    @EnvironmentObject var homeModel: HomeModel
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Analytics View")
+            ScrollView {
+                VStack {
+                    Text("Analytics View")
+                    Text(homeModel.tempLog)
+            }
+            
+                
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "Analysis")
         }

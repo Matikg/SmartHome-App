@@ -31,6 +31,7 @@ struct DeviceTypePicker: View {
             }
             .padding(.horizontal)
         }
+        .shadow(radius: 5)
     }
 }
 
@@ -41,7 +42,7 @@ struct PickerButtonStyle: ButtonStyle {
         configuration.label
             .frame(width: 30, height: 25)
             .padding(10)
-            .background(isSelected ? Color.blue : Color.gray)
+            .background(isSelected ? Color.blue : Color.gray.opacity(0.8))
             .foregroundColor(.white)
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)

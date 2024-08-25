@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State var showingSettings = false
     @EnvironmentObject var homeModel: HomeModel
-    @State private var setButtonPressed = false
+    @State private var isSprinklerOn = false
     
     var body: some View {
         NavigationStack {
@@ -21,6 +21,7 @@ struct HomeView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(spacing: 10) {
+                            Spacer().frame(width: 5)
                             
                             IndicatorView(image: "thermostat", label: "Climate",
                                           value: "\(homeModel.temperature) °C")
@@ -33,18 +34,24 @@ struct HomeView: View {
                             
                             IndicatorView(image: "lock", label: "Security",
                                           value: homeModel.numberOfDevicesOn(ofType: .lock) == 0 ? "Disarmed" : "\(homeModel.numberOfDevicesOn(ofType: .lock)) Locked")
+                            
+                            Spacer().frame(width: 5)
                         }
                         .frame(height: 100)
                     }
+                    .shadow(radius: 5)
                     
                     // MARK: Scenes
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Scenes")
                             .font(.headline)
+                            .padding(.leading)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(spacing: 10) {
+                                Spacer().frame(width: 5)
+                                
                                 ForEach(homeModel.scenes.indices, id: \.self) { index in
                                     let scene = homeModel.scenes[index]
                                     HomeSceneView(scene: scene, isSelected: scene == homeModel.selectedScene,
@@ -58,6 +65,8 @@ struct HomeView: View {
                                         }
                                     })
                                 }
+                                
+                                Spacer().frame(width: 5)
                             }
                             .frame(height: 100)
                         }
@@ -71,9 +80,9 @@ struct HomeView: View {
                         
                         Grid(horizontalSpacing: 10, verticalSpacing: 10) {
                             GridRow {
-                                ThermostatControlView(setButtonPressed: $setButtonPressed)
+                                ThermostatControlView()
                                 
-                                SprinklerControlView()
+                                SprinklerControlView(isSprinklerOn: $isSprinklerOn)
                             }
                             
                             GridRow {
@@ -84,9 +93,9 @@ struct HomeView: View {
                         }
                         .frame(height: 400)
                     }
+                    .padding(.horizontal)
                 }
                 .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
-                .padding(.horizontal)
             }
         }
     }

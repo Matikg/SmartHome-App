@@ -21,7 +21,7 @@ struct ControlGridCell<Content: View>: View {
     var body: some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray)
+                .fill(Color.gray.opacity(0.8))
                 .shadow(radius: 5)
             
             VStack(spacing: 15) {
@@ -38,7 +38,7 @@ struct ControlGridCell<Content: View>: View {
                     
                     Spacer()
                 }
-                .padding(.horizontal, 5)
+                .padding(.leading, 5)
                 .padding(.top, 15)
                 .frame(height: 45)
                 
@@ -47,5 +47,6 @@ struct ControlGridCell<Content: View>: View {
                 content
             }
         }
+        .shadow(radius: 5)
     }
 }
