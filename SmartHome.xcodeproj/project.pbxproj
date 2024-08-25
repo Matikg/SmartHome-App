@@ -28,6 +28,11 @@
 		E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */; };
 		E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8811B822BDA8351000FC08D /* DeviceListView.swift */; };
 		E8B2B92F2C7AB2CF00870110 /* QDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B92E2C7AB2CF00870110 /* QDivider.swift */; };
+		E8B2B9322C7B20F400870110 /* ThermostatControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9312C7B20F400870110 /* ThermostatControlView.swift */; };
+		E8B2B9342C7B250300870110 /* ControlGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9332C7B250300870110 /* ControlGridCell.swift */; };
+		E8B2B9362C7B260C00870110 /* SprinklerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */; };
+		E8B2B9382C7B268200870110 /* GateControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9372C7B268200870110 /* GateControlView.swift */; };
+		E8B2B93A2C7B26E700870110 /* UnknownControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9392C7B26E700870110 /* UnknownControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +60,11 @@
 		E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypePicker.swift; sourceTree = "<group>"; };
 		E8811B822BDA8351000FC08D /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		E8B2B92E2C7AB2CF00870110 /* QDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QDivider.swift; sourceTree = "<group>"; };
+		E8B2B9312C7B20F400870110 /* ThermostatControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatControlView.swift; sourceTree = "<group>"; };
+		E8B2B9332C7B250300870110 /* ControlGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlGridCell.swift; sourceTree = "<group>"; };
+		E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinklerControlView.swift; sourceTree = "<group>"; };
+		E8B2B9372C7B268200870110 /* GateControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateControlView.swift; sourceTree = "<group>"; };
+		E8B2B9392C7B26E700870110 /* UnknownControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +182,7 @@
 				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
 				E8811B802BDA8282000FC08D /* DeviceTypePicker.swift */,
 				E8B2B92E2C7AB2CF00870110 /* QDivider.swift */,
+				E8B2B9332C7B250300870110 /* ControlGridCell.swift */,
 			);
 			path = CustomStyles;
 			sourceTree = "<group>";
@@ -179,6 +190,7 @@
 		E8B2B9122C79E96700870110 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E8B2B9302C7B20D800870110 /* Controls */,
 				E8811B7A2BDA80A5000FC08D /* HomeView.swift */,
 				E84FA8972C76577400594AE5 /* HomeSceneView.swift */,
 				E84FA8932C753A9B00594AE5 /* IndicatorView.swift */,
@@ -193,6 +205,17 @@
 				E8811B7E2BDA81D5000FC08D /* DeviceView.swift */,
 			);
 			path = Device;
+			sourceTree = "<group>";
+		};
+		E8B2B9302C7B20D800870110 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E8B2B9312C7B20F400870110 /* ThermostatControlView.swift */,
+				E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */,
+				E8B2B9372C7B268200870110 /* GateControlView.swift */,
+				E8B2B9392C7B26E700870110 /* UnknownControlView.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,7 +335,9 @@
 				E8811B7B2BDA80A5000FC08D /* HomeView.swift in Sources */,
 				E8811B812BDA8283000FC08D /* DeviceTypePicker.swift in Sources */,
 				E8811B772BDA7E0A000FC08D /* SettingsView.swift in Sources */,
+				E8B2B9382C7B268200870110 /* GateControlView.swift in Sources */,
 				E8811B5F2BDA4DBA000FC08D /* ToolBarView.swift in Sources */,
+				E8B2B9362C7B260C00870110 /* SprinklerControlView.swift in Sources */,
 				E84FA8962C76542500594AE5 /* HomeScene.swift in Sources */,
 				E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */,
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
@@ -325,8 +350,11 @@
 				E8B2B92F2C7AB2CF00870110 /* QDivider.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
+				E8B2B9322C7B20F400870110 /* ThermostatControlView.swift in Sources */,
 				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,
 				E86436562C5FB3E40029858F /* SettingsViewModel.swift in Sources */,
+				E8B2B93A2C7B26E700870110 /* UnknownControlView.swift in Sources */,
+				E8B2B9342C7B250300870110 /* ControlGridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

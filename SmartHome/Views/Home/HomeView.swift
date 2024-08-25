@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
-    @Environment(\.colorScheme) var colorScheme
     @State var showingSettings = false
     @EnvironmentObject var homeModel: HomeModel
-    @State var setButtonPressed = false
-    let gradient = Gradient(colors: [.blue, .yellow, .orange, .red])
+    @State private var setButtonPressed = false
     
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack {
+                    
+                    // MARK: Indicators
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(spacing: 10) {
                             
@@ -36,6 +36,8 @@ struct HomeView: View {
                         }
                         .frame(height: 100)
                     }
+                    
+                    // MARK: Scenes
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Scenes")
@@ -61,165 +63,31 @@ struct HomeView: View {
                         }
                     }
                     
+                    // MARK: Controls
+                    
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Controls")
                             .font(.headline)
                         
                         Grid(horizontalSpacing: 10, verticalSpacing: 10) {
                             GridRow {
-                                ZStack(alignment: .top) {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .shadow(radius: 5)
-                                    
-                                    VStack(spacing: 15) {
-                                        HStack(alignment: .center, spacing: 1) {
-                                            Image("thermos")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 50, height: 50)
-                                            
-                                            Text("Thermostat")
-                                                .foregroundStyle(.white)
-                                                .font(.title2)
-                                                .bold()
-                                            
-                                            Spacer()
-                                        }
-                                        .padding(.horizontal, 5)
-                                        .padding(.top, 15)
-                                        .frame(height: 45)
-                                        
-                                        QDivider()
-                                        
-                                        Gauge(
-                                            value: homeModel.setTemperature,
-                                            in: homeModel.minTemperature...homeModel.maxTemperature,
-                                            label: {
-                                                Text("Temperature")
-                                            },
-                                            currentValueLabel: { Text("\(homeModel.setTemperature, format: .number)")
-                                                .foregroundStyle(Color.white)},
-                                            minimumValueLabel: { Text(homeModel.minTemperature, format: .number)
-                                                .foregroundStyle(Color.white)},
-                                            maximumValueLabel: { Text(homeModel.maxTemperature, format: .number)
-                                                .foregroundStyle(Color.white)}
-                                        )
-                                        .gaugeStyle(.accessoryCircular)
-                                        .tint(gradient)
-                                        .scaleEffect(1.3)
-                                        
-                                        HStack {
-                                            Stepper("Temperature", value: $homeModel.setTemperature, in: homeModel.minTemperature...homeModel.maxTemperature)
-                                                .labelsHidden()
-                                                .buttonRepeatBehavior(.enabled)
-                                                .background(Color.blue, in: RoundedRectangle(cornerRadius: 5))
-                                            
-                                            Text("Set")
-                                                .foregroundStyle(isDarkMode ? .white : .black)
-                                                .padding(.vertical, 6)
-                                                .padding(.horizontal)
-                                                .background(setButtonPressed ? (colorScheme == .dark ? Color.black.opacity(0.7) : Color.white.opacity(0.7)) : Color.blue, in: RoundedRectangle(cornerRadius: 10))
-                                                .background(Color.blue, in: RoundedRectangle(cornerRadius: 5))
-                                                .simultaneousGesture(
-                                                    DragGesture(minimumDistance: 0)
-                                                        .onChanged { _ in
-                                                            setButtonPressed = true
-                                                        }
-                                                        .onEnded { _ in
-                                                            withAnimation(.easeOut(duration: 0.2)) {
-                                                                setButtonPressed = false
-                                                            }
-                                                        }
-                                                )
-                                        }
-                                    }
-                                }
+                                ThermostatControlView(setButtonPressed: $setButtonPressed)
                                 
-                                ZStack(alignment: .top) {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .shadow(radius: 5)
-                                    
-                                    VStack(spacing: 15) {
-                                        HStack(alignment: .center, spacing: 1) {
-                                            Image("sprinkler")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 50, height: 50)
-                                            
-                                            Text("Sprinkler")
-                                                .foregroundStyle(.white)
-                                                .font(.title2)
-                                                .bold()
-                                            
-                                            Spacer()
-                                        }
-                                        .padding(.horizontal, 5)
-                                        .padding(.top, 15)
-                                        .frame(height: 45)
-                                        
-                                        QDivider()
-                                    }
-                                }
+                                SprinklerControlView()
                             }
                             
                             GridRow {
-                                ZStack(alignment: .top) {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .shadow(radius: 5)
-                                    
-                                    VStack(spacing: 15) {
-                                        HStack(alignment: .center, spacing: 1) {
-                                            Image("gate")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 50, height: 50)
-                                            
-                                            Text("Garage")
-                                                .foregroundStyle(.white)
-                                                .font(.title2)
-                                                .bold()
-                                            
-                                            Spacer()
-                                        }
-                                        .padding(.horizontal, 5)
-                                        .padding(.top, 15)
-                                        .frame(height: 45)
-                                        
-                                        QDivider()
-                                    }
-                                }
-                                ZStack(alignment: .top) {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .shadow(radius: 5)
-                                    
-                                    VStack(spacing: 15) {
-                                        HStack(alignment: .center, spacing: 1) {
-                                            
-                                        }
-                                        .padding(.horizontal, 5)
-                                        .padding(.top, 15)
-                                        .frame(height: 45)
-                                        
-                                        QDivider()
-                                    }
-                                }
+                                GateControlView()
                                 
+                                UnknownControlView()
                             }
                         }
                         .frame(height: 400)
                     }
-                    
-                    Spacer()
-                    
                 }
                 .settingsToolbar(showingSettings: $showingSettings, title: "My Home")
                 .padding(.horizontal)
             }
-            
         }
     }
 }
