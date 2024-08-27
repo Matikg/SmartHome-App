@@ -82,7 +82,7 @@ struct HomeView: View {
                             GridRow {
                                 ThermostatControlView()
                                 
-                                SprinklerControlView(isSprinklerOn: $isSprinklerOn)
+                                SprinklerControlView()
                             }
                             
                             GridRow {

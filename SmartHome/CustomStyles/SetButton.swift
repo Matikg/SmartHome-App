@@ -15,11 +15,11 @@ struct SetButton: View {
     var action: () -> Void
     
     var body: some View {
-        Text("Set")
+        Text(title)
             .foregroundStyle(isDarkMode ? .white : .black)
             .padding(.vertical, 6)
             .padding(.horizontal)
-            .background(isPressed ? (colorScheme == .dark ? Color.black.opacity(0.7) : Color.white.opacity(0.7)) : Color.blue, in: RoundedRectangle(cornerRadius: 10))
+            .background(isPressed ? (colorScheme == .dark ? Color(UIColor.darkGray) : Color(UIColor.lightGray)) : Color.blue, in: RoundedRectangle(cornerRadius: 10))
             .background(Color.blue, in: RoundedRectangle(cornerRadius: 5))
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)

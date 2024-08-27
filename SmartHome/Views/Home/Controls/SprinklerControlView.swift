@@ -8,21 +8,34 @@
 import SwiftUI
 
 struct SprinklerControlView: View {
-    @Binding var isSprinklerOn: Bool
+    @EnvironmentObject var homeModel: HomeModel
+    @Environment(\.colorScheme) var colorScheme
+    @State private var scheduleButtonPressed = false
     
     var body: some View {
         ControlGridCell(image: "sprinkler", label: "Sprinkler") {
-            Toggle(isOn: $isSprinklerOn) {
+            VStack {
+                Spacer()
                 
+                GeometryReader { geo in
+                    DatePicker("Schedule Watering", selection: $homeModel.selectedDate, in: Date()..., displayedComponents: [.date, .hourAndMinute])
+                        .labelsHidden()
+                        .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color.blue.opacity(0.5)))
+                        .scaleEffect(0.9)
+                        .frame(width: geo.size.width)
+                }
+                
+                SetButton(title: "Schedule", isPressed: $scheduleButtonPressed, colorScheme: colorScheme) {
+                    homeModel.scheduleWatering()
+                }
             }
-            Link("NodeRed", destination: URL(string: "https://192.168.0.12:1881")!)
-            .labelsHidden()
-            .toggleStyle(SwitchToggleStyle(tint: .blue))
+            .padding(.bottom, 15)
         }
     }
 }
 
 #Preview {
-    SprinklerControlView(isSprinklerOn: .constant(false))
+    SprinklerControlView()
         .frame(width: 200, height: 200)
+        .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }

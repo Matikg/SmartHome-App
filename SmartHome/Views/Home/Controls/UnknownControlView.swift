@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UnknownControlView: View {
     var body: some View {
-        ControlGridCell(image: "", label: "") {
+        ControlGridCell(image: "fan", label: "Airflow") {
             EmptyView()
         }
     }

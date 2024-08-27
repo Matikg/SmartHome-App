@@ -13,13 +13,19 @@ struct AnalyticsView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    Text("Analytics View")
-                    Text(homeModel.tempLog)
-            }
-            
-                
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(homeModel.logs, id: \.value) { log in
+                            HStack {
+                                Text(log.device)
+                                Text(String(log.value))
+                                Text(log.time)
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                }
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "Analysis")
         }

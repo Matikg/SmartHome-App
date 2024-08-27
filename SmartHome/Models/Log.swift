@@ -7,15 +7,8 @@
 
 import Foundation
 
-struct Log: Decodable, Identifiable {
-    var id = UUID()
-    let time: Date
-    let value: String
+struct Log: Decodable {
+    let time: String
+    let value: Double
     let device: String
-    
-    enum CodingKeys: String, CodingKey {
-        case time
-        case value
-        case device
-    }
 }

@@ -25,7 +25,7 @@ struct ControlGridCell<Content: View>: View {
                 .shadow(radius: 5)
             
             VStack(spacing: 15) {
-                HStack(alignment: .center, spacing: 1) {
+                HStack(alignment: .center, spacing: 5) {
                     Image(image)
                         .resizable()
                         .scaledToFit()

@@ -8,9 +8,29 @@
 import SwiftUI
 
 struct GateControlView: View {
+    @EnvironmentObject var homeModel: HomeModel
+    @Environment(\.colorScheme) var colorScheme
+    @State private var openButtonPressed = false
+    @State private var closedButtonPressed = false
+    
     var body: some View {
         ControlGridCell(image: "gate", label: "Garage") {
-            EmptyView()
+            VStack(spacing: 0) {
+                ProgressView("Operation in Progress", value: homeModel.operationProgress)
+                    .labelsHidden()
+                
+                Text(homeModel.isGateOpen ? "Opened" : "Closed")
+    
+            }
+            .padding(.horizontal)
+            
+            SetButton(title: "Open", isPressed: $openButtonPressed, colorScheme: colorScheme) {
+                homeModel.openGarageGate()
+            }
+            SetButton(title: "Close", isPressed: $closedButtonPressed, colorScheme: colorScheme) {
+                homeModel.closeGarageGate()
+            }
+            
         }
     }
 }
@@ -18,4 +38,5 @@ struct GateControlView: View {
 #Preview {
     GateControlView()
         .frame(width: 200, height: 200)
+        .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }

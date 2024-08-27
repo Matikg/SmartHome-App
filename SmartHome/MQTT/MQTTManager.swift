@@ -100,7 +100,7 @@ extension MQTTManager: CocoaMQTTDelegate {
         if ack == .accept {
             serverConnectionState.send(.connected)
             connectionErrorMessage.send("")
-            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/temperature/log"])
+            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/temperature/log", "garage/gate/status", "master/power/log"])
             publish(topic: "synchronize", with: "update")
             publish(topic: "logs", with: "update")
         }
@@ -138,7 +138,9 @@ enum Topic {
     case temperature(String)
     case power(String)
     case tempSet(String)
-    case tempLog(String)
+    case tempLog([Log])
+    case garageGate(String)
+    case powerLog(String)
     case unknown
     
     init(message: CocoaMQTTMessage) {
@@ -151,11 +153,40 @@ enum Topic {
         case "master/power":
             self = .power(message.string ?? "")
             
+        case "master/power/log":
+            self = .powerLog(message.string ?? "")
+            
         case "master/temperature/log":
-            self = .tempLog(message.string ?? "")
+            
+            if let string = message.string, let jsonData = string.data(using: .utf8) {
+                
+                // Create a JSONDecoder instance
+                let decoder = JSONDecoder()
+                
+                // Set the date decoding strategy
+                decoder.dateDecodingStrategy = .iso8601
+                
+                // Decode the JSON into a Log instance
+                do {
+                    let logs = try decoder.decode([Log].self, from: jsonData)
+                    self = .tempLog(logs)
+                    
+                } catch {
+                    print("Failed to decode JSON: \(error)")
+                    self = .tempLog([])
+                }
+                
+            } else {
+                print("nie da sie")
+                self = .tempLog([])
+            }
+            
             
         case "master/temperature/set":
             self = .tempSet(message.string ?? "")
+            
+        case "garage/gate/status":
+            self = .garageGate(message.string ?? "")
             
         default:
             self = .unknown

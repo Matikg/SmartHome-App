@@ -17,33 +17,38 @@ struct ThermostatControlView: View {
     
     var body: some View {
         ControlGridCell(image: "thermos", label: "Thermostat") {
-            Gauge(
-                value: homeModel.setTemperature,
-                in: homeModel.minTemperature...homeModel.maxTemperature,
-                label: {
-                    Text("Temperature")
-                },
-                currentValueLabel: { Text("\(homeModel.setTemperature, format: .number)")
-                    .foregroundStyle(Color.white)},
-                minimumValueLabel: { Text(homeModel.minTemperature, format: .number)
-                    .foregroundStyle(Color.white)},
-                maximumValueLabel: { Text(homeModel.maxTemperature, format: .number)
-                    .foregroundStyle(Color.white)}
-            )
-            .gaugeStyle(.accessoryCircular)
-            .tint(gradient)
-            .scaleEffect(1.3)
-            
-            HStack {
-                Stepper("Temperature", value: $homeModel.setTemperature, in: homeModel.minTemperature...homeModel.maxTemperature)
-                    .labelsHidden()
-                    .buttonRepeatBehavior(.enabled)
-                    .background(Color.blue, in: RoundedRectangle(cornerRadius: 5))
+            VStack {
+                Spacer()
                 
-                SetButton(title: "Set", isPressed: $setButtonPressed, colorScheme: colorScheme) {
-                    print("Test1")
+                Gauge(
+                    value: homeModel.setTemperature,
+                    in: homeModel.minTemperature...homeModel.maxTemperature,
+                    label: {
+                        Text("Temperature")
+                    },
+                    currentValueLabel: { Text("\(homeModel.setTemperature, format: .number)")
+                        .foregroundStyle(Color.white)},
+                    minimumValueLabel: { Text(homeModel.minTemperature, format: .number)
+                        .foregroundStyle(Color.white)},
+                    maximumValueLabel: { Text(homeModel.maxTemperature, format: .number)
+                        .foregroundStyle(Color.white)}
+                )
+                .gaugeStyle(.accessoryCircular)
+                .tint(gradient)
+                .scaleEffect(1.3)
+                
+                HStack {
+                    Stepper("Temperature", value: $homeModel.setTemperature, in: homeModel.minTemperature...homeModel.maxTemperature)
+                        .labelsHidden()
+                        .buttonRepeatBehavior(.enabled)
+                        .background(Color.blue, in: RoundedRectangle(cornerRadius: 5))
+                    
+                    SetButton(title: "Set", isPressed: $setButtonPressed, colorScheme: colorScheme) {
+                        homeModel.setHomeTemperature()
+                    }
                 }
             }
+            .padding(.bottom, 15)
         }
     }
 }
