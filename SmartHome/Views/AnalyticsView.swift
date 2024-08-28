@@ -12,20 +12,16 @@ struct AnalyticsView: View {
     @EnvironmentObject var homeModel: HomeModel
     
     var body: some View {
-        NavigationView {
-            VStack {
+        NavigationStack {
+            VStack(alignment: .leading) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
-                        ForEach(homeModel.logs, id: \.value) { log in
-                            HStack {
-                                Text(log.device)
-                                Text(String(log.value))
-                                Text(log.time)
-                            }
-                            .padding(.horizontal)
+                        ForEach(homeModel.logs, id: \.time) { log in
+                            LogRowView(log: log)
                         }
                     }
                 }
+                .padding(.top)
             }
             .settingsToolbar(showingSettings: $showingSettings, title: "Analysis")
         }

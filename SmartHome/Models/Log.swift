@@ -8,7 +8,7 @@
 import Foundation
 
 struct Log: Decodable {
-    let time: String
+    let time: Date
     let value: Double
     let device: String
 }

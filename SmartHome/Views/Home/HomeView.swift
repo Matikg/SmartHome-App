@@ -88,7 +88,7 @@ struct HomeView: View {
                             GridRow {
                                 GateControlView()
                                 
-                                UnknownControlView()
+                                AirControlView()
                             }
                         }
                         .frame(height: 400)

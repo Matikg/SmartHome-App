@@ -15,22 +15,36 @@ struct GateControlView: View {
     
     var body: some View {
         ControlGridCell(image: "gate", label: "Garage") {
-            VStack(spacing: 0) {
-                ProgressView("Operation in Progress", value: homeModel.operationProgress)
-                    .labelsHidden()
+            VStack(alignment: .center, spacing: 10) {
                 
-                Text(homeModel.isGateOpen ? "Opened" : "Closed")
-    
+                Spacer()
+                if homeModel.isGateOpen {
+                    Label("Opened", systemImage: "door.garage.open")
+                        .position(x: 80, y: -15)
+                }
+                else {
+                    Label("Closed", systemImage: "door.garage.closed")
+                        .position(x: 80, y: -15)
+                }
+                
+                ProgressIndicator(progress: $homeModel.operationProgress, width: 145, height: 15)
+                    .position(x: 82, y: -5)
             }
             .padding(.horizontal)
             
-            SetButton(title: "Open", isPressed: $openButtonPressed, colorScheme: colorScheme) {
-                homeModel.openGarageGate()
+            HStack {
+                SetButton(title: "Open", isPressed: $openButtonPressed, colorScheme: colorScheme) {
+                    homeModel.openGarageGate()
+                }
+                .disabled(homeModel.isGateOpen)
+                
+                SetButton(title: "Close", isPressed: $closedButtonPressed, colorScheme: colorScheme) {
+                    homeModel.closeGarageGate()
+                }
+                .disabled(!homeModel.isGateOpen)
             }
-            SetButton(title: "Close", isPressed: $closedButtonPressed, colorScheme: colorScheme) {
-                homeModel.closeGarageGate()
-            }
-            
+            .padding(.bottom, 15)
+            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 }

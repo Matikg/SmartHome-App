@@ -22,6 +22,7 @@ final class HomeModel: ObservableObject {
     @Published var operationProgress = 0.0
     @Published var isGateOpen = false
     @Published var isGateOperating = false
+    @Published var fanSpeed = 0.0
     
     let minTemperature = 0.0
     let maxTemperature = 30.0
@@ -40,8 +41,11 @@ final class HomeModel: ObservableObject {
                     self.temperature = value
                 case .power(let value):
                     self.power = value
+                case .fanSpeed(let value):
+                    self.fanSpeed = Double(value) ?? 0.0
                 case .tempLog(let logs):
-                    self.logs = logs
+                    self.logs.removeAll()
+                    self.logs.append(contentsOf: logs)
                 case .powerLog(let log):
                     self.tempLog = log
                 case .tempSet(let value):
@@ -145,6 +149,10 @@ final class HomeModel: ObservableObject {
         mqttManager.publish(topic: "master/temperature/set", with: String(setTemperature))
     }
     
+    func setFanSpeed() {
+        mqttManager.publish(topic: "master/fan/set", with: String(fanSpeed))
+    }
+    
     func scheduleWatering() {
         let isoDateFormatter = ISO8601DateFormatter()
         let scheduledTime = isoDateFormatter.string(from: selectedDate)
@@ -159,22 +167,31 @@ final class HomeModel: ObservableObject {
     }
     
     func openGarageGate() {
-//        isGateOperating = true
+        isGateOperating = true
         mqttManager.publish(topic: "garage/gate/control", with: "TRUE")
         
-//        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-//            self.operationProgress += 0.1
-//            if self.operationProgress >= 1.0 {
-//                self.isGateOperating = false
-//                self.isGateOpen.toggle()
-//                timer.invalidate()
-//            }
-//        }
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            self.operationProgress += 0.02
+            if self.operationProgress >= 1.0 {
+                self.isGateOperating = false
+                timer.invalidate()
+                self.operationProgress = 0.0
+            }
+        }
     }
     
     func closeGarageGate() {
+        isGateOperating = true
         mqttManager.publish(topic: "garage/gate/control", with: "FALSE")
-
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            self.operationProgress += 0.02
+            if self.operationProgress >= 1.0 {
+                self.isGateOperating = false
+                timer.invalidate()
+                self.operationProgress = 0.0
+            }
+        }
     }
 }
 

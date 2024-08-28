@@ -36,6 +36,7 @@ struct ThermostatControlView: View {
                 .gaugeStyle(.accessoryCircular)
                 .tint(gradient)
                 .scaleEffect(1.3)
+                .position(x: 100, y: 25)
                 
                 HStack {
                     Stepper("Temperature", value: $homeModel.setTemperature, in: homeModel.minTemperature...homeModel.maxTemperature)

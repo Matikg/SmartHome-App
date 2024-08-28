@@ -32,9 +32,11 @@
 		E8B2B9342C7B250300870110 /* ControlGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9332C7B250300870110 /* ControlGridCell.swift */; };
 		E8B2B9362C7B260C00870110 /* SprinklerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */; };
 		E8B2B9382C7B268200870110 /* GateControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9372C7B268200870110 /* GateControlView.swift */; };
-		E8B2B93A2C7B26E700870110 /* UnknownControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9392C7B26E700870110 /* UnknownControlView.swift */; };
+		E8B2B93A2C7B26E700870110 /* AirControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B9392C7B26E700870110 /* AirControlView.swift */; };
 		E8B2B93C2C7B353400870110 /* SetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B93B2C7B353400870110 /* SetButton.swift */; };
 		E8B2B93E2C7B698100870110 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B93D2C7B698100870110 /* Log.swift */; };
+		E8B6AB552C7E76C600517CD9 /* LogRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB542C7E76C600517CD9 /* LogRowView.swift */; };
+		E8B6AB572C7FC73C00517CD9 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,9 +68,11 @@
 		E8B2B9332C7B250300870110 /* ControlGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlGridCell.swift; sourceTree = "<group>"; };
 		E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinklerControlView.swift; sourceTree = "<group>"; };
 		E8B2B9372C7B268200870110 /* GateControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GateControlView.swift; sourceTree = "<group>"; };
-		E8B2B9392C7B26E700870110 /* UnknownControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownControlView.swift; sourceTree = "<group>"; };
+		E8B2B9392C7B26E700870110 /* AirControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirControlView.swift; sourceTree = "<group>"; };
 		E8B2B93B2C7B353400870110 /* SetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetButton.swift; sourceTree = "<group>"; };
 		E8B2B93D2C7B698100870110 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		E8B6AB542C7E76C600517CD9 /* LogRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRowView.swift; sourceTree = "<group>"; };
+		E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,7 @@
 				E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */,
 				E8811B762BDA7E0A000FC08D /* SettingsView.swift */,
 				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
+				E8B6AB542C7E76C600517CD9 /* LogRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 				E8B2B92E2C7AB2CF00870110 /* QDivider.swift */,
 				E8B2B9332C7B250300870110 /* ControlGridCell.swift */,
 				E8B2B93B2C7B353400870110 /* SetButton.swift */,
+				E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */,
 			);
 			path = CustomStyles;
 			sourceTree = "<group>";
@@ -219,7 +225,7 @@
 				E8B2B9312C7B20F400870110 /* ThermostatControlView.swift */,
 				E8B2B9352C7B260C00870110 /* SprinklerControlView.swift */,
 				E8B2B9372C7B268200870110 /* GateControlView.swift */,
-				E8B2B9392C7B26E700870110 /* UnknownControlView.swift */,
+				E8B2B9392C7B26E700870110 /* AirControlView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -352,16 +358,18 @@
 				E8B2B93C2C7B353400870110 /* SetButton.swift in Sources */,
 				E8811B752BDA6CF6000FC08D /* HomeModel.swift in Sources */,
 				E8811B832BDA8351000FC08D /* DeviceListView.swift in Sources */,
+				E8B6AB552C7E76C600517CD9 /* LogRowView.swift in Sources */,
 				E8811B7F2BDA81D5000FC08D /* DeviceView.swift in Sources */,
 				E8811B792BDA7FBC000FC08D /* ToolBarWithSettings.swift in Sources */,
 				E84FA8982C76577400594AE5 /* HomeSceneView.swift in Sources */,
 				E8B2B92F2C7AB2CF00870110 /* QDivider.swift in Sources */,
+				E8B6AB572C7FC73C00517CD9 /* ProgressIndicator.swift in Sources */,
 				E8811B6B2BDA6959000FC08D /* MQTTManager.swift in Sources */,
 				E8811B5D2BDA4DBA000FC08D /* SmartHomeApp.swift in Sources */,
 				E8B2B9322C7B20F400870110 /* ThermostatControlView.swift in Sources */,
 				E8811B732BDA6C38000FC08D /* Room.swift in Sources */,
 				E86436562C5FB3E40029858F /* SettingsViewModel.swift in Sources */,
-				E8B2B93A2C7B26E700870110 /* UnknownControlView.swift in Sources */,
+				E8B2B93A2C7B26E700870110 /* AirControlView.swift in Sources */,
 				E8B2B9342C7B250300870110 /* ControlGridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

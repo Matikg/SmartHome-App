@@ -100,7 +100,7 @@ extension MQTTManager: CocoaMQTTDelegate {
         if ack == .accept {
             serverConnectionState.send(.connected)
             connectionErrorMessage.send("")
-            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/temperature/log", "garage/gate/status", "master/power/log"])
+            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/fan/set", "master/temperature/log", "garage/gate/status", "master/power/log"])
             publish(topic: "synchronize", with: "update")
             publish(topic: "logs", with: "update")
         }
@@ -138,17 +138,19 @@ enum Topic {
     case temperature(String)
     case power(String)
     case tempSet(String)
+    case fanSpeed(String)
     case tempLog([Log])
     case garageGate(String)
     case powerLog(String)
     case unknown
     
     init(message: CocoaMQTTMessage) {
-        
         switch message.topic {
-            
         case "master/temperature":
             self = .temperature(message.string ?? "")
+            
+        case "master/fan/set":
+            self = .fanSpeed(message.string ?? "")
             
         case "master/power":
             self = .power(message.string ?? "")
@@ -157,16 +159,22 @@ enum Topic {
             self = .powerLog(message.string ?? "")
             
         case "master/temperature/log":
-            
+            print(message.string ?? "NIE")
             if let string = message.string, let jsonData = string.data(using: .utf8) {
                 
                 // Create a JSONDecoder instance
                 let decoder = JSONDecoder()
                 
-                // Set the date decoding strategy
-                decoder.dateDecodingStrategy = .iso8601
+                let isoFormatter = ISO8601DateFormatter()
+                isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                decoder.dateDecodingStrategy = .custom { decoder in
+                    let container = try decoder.singleValueContainer()
+                    let dateStr = try container.decode(String.self)
+                    return isoFormatter.date(from: dateStr) ?? Date()
+                    
+                }
                 
-                // Decode the JSON into a Log instance
+                
                 do {
                     let logs = try decoder.decode([Log].self, from: jsonData)
                     self = .tempLog(logs)
@@ -177,10 +185,8 @@ enum Topic {
                 }
                 
             } else {
-                print("nie da sie")
                 self = .tempLog([])
             }
-            
             
         case "master/temperature/set":
             self = .tempSet(message.string ?? "")
