@@ -175,6 +175,7 @@ enum Topic {
         case "master/fan/log":
             if let logs = Topic.decodeLogs(from: message.string) {
                 self = .fanLog(logs)
+                print(logs)
             } else {
                 self = .fanLog([])
             }
