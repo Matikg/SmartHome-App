@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct SmartHomeApp: App {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    @AppStorage("isFirstlaunch") private var isFirstLaunch: Bool = true
     
     let homeModel: HomeModel
     let settingsViewModel: SettingsViewModel
@@ -21,10 +22,16 @@ struct SmartHomeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ToolBarView()
-                .preferredColorScheme(isDarkMode ? .dark : .light)
-                .environmentObject(homeModel)
-                .environmentObject(settingsViewModel)
+            if isFirstLaunch {
+                WelcomeView()
+                    .preferredColorScheme(.dark)
+            }
+            else {
+                ToolBarView()
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
+                    .environmentObject(homeModel)
+                    .environmentObject(settingsViewModel)
+            }
         }
     }
 }
