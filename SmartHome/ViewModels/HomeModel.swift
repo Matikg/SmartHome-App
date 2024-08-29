@@ -46,8 +46,11 @@ final class HomeModel: ObservableObject {
                 case .tempLog(let logs):
                     self.logs.removeAll()
                     self.logs.append(contentsOf: logs)
-                case .powerLog(let log):
-                    self.tempLog = log
+                case .powerLog(let logs):
+//                    self.logs.removeAll()
+                    self.logs.append(contentsOf: logs)
+                case .fanLog(let logs):
+                    self.logs.append(contentsOf: logs)
                 case .tempSet(let value):
                     self.setTemperature = Double(value) ?? 0.0
                 case .garageGate(let status):

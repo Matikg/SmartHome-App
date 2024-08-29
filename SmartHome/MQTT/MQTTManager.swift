@@ -100,9 +100,10 @@ extension MQTTManager: CocoaMQTTDelegate {
         if ack == .accept {
             serverConnectionState.send(.connected)
             connectionErrorMessage.send("")
-            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/fan/set", "master/temperature/log", "garage/gate/status", "master/power/log"])
-            publish(topic: "synchronize", with: "update")
+            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/fan/set", "master/temperature/log", "garage/gate/status", "master/power/log", "master/fan/log"])
+            
             publish(topic: "logs", with: "update")
+            publish(topic: "synchronize", with: "update")
         }
         else {
             let errorMessage = "Failed to connect: \(ack.description)"
@@ -141,7 +142,8 @@ enum Topic {
     case fanSpeed(String)
     case tempLog([Log])
     case garageGate(String)
-    case powerLog(String)
+    case powerLog([Log])
+    case fanLog([Log])
     case unknown
     
     init(message: CocoaMQTTMessage) {
@@ -156,36 +158,25 @@ enum Topic {
             self = .power(message.string ?? "")
             
         case "master/power/log":
-            self = .powerLog(message.string ?? "")
+            if let logs = Topic.decodeLogs(from: message.string) {
+                print(logs)
+                self = .powerLog(logs)
+            } else {
+                self = .powerLog([])
+            }
             
         case "master/temperature/log":
-            print(message.string ?? "NIE")
-            if let string = message.string, let jsonData = string.data(using: .utf8) {
-                
-                // Create a JSONDecoder instance
-                let decoder = JSONDecoder()
-                
-                let isoFormatter = ISO8601DateFormatter()
-                isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                decoder.dateDecodingStrategy = .custom { decoder in
-                    let container = try decoder.singleValueContainer()
-                    let dateStr = try container.decode(String.self)
-                    return isoFormatter.date(from: dateStr) ?? Date()
-                    
-                }
-                
-                
-                do {
-                    let logs = try decoder.decode([Log].self, from: jsonData)
-                    self = .tempLog(logs)
-                    
-                } catch {
-                    print("Failed to decode JSON: \(error)")
-                    self = .tempLog([])
-                }
-                
+            if let logs = Topic.decodeLogs(from: message.string) {
+                self = .tempLog(logs)
             } else {
                 self = .tempLog([])
+            }
+            
+        case "master/fan/log":
+            if let logs = Topic.decodeLogs(from: message.string) {
+                self = .fanLog(logs)
+            } else {
+                self = .fanLog([])
             }
             
         case "master/temperature/set":
@@ -196,6 +187,30 @@ enum Topic {
             
         default:
             self = .unknown
+        }
+    }
+    
+    private static func decodeLogs(from string: String?) -> [Log]? {
+        guard let string = string, let jsonData = string.data(using: .utf8) else {
+            return nil
+        }
+        
+        let decoder = JSONDecoder()
+        
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let dateStr = try container.decode(String.self)
+            return isoFormatter.date(from: dateStr) ?? Date()
+        }
+        
+        do {
+            let logs = try decoder.decode([Log].self, from: jsonData)
+            return logs
+        } catch {
+            print("Failed to decode JSON: \(error)")
+            return nil
         }
     }
 }

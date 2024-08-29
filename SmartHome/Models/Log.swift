@@ -11,4 +11,5 @@ struct Log: Decodable {
     let time: Date
     let value: Double
     let device: String
+    let unit: String
 }
