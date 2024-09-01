@@ -13,8 +13,8 @@ class SettingsViewModel: ObservableObject {
     
     @Published var host: String = "192.168.0.12"
     @Published var identifier: String = "iOS Device"
-    @Published var username: String = "BarMat"
-    @Published var password: String = "test"
+    @Published var username: String = ""
+    @Published var password: String = ""
     @Published var serverState: MQTTAppConnectionState = .disconnected
     @Published var errorMessage: String = ""
     

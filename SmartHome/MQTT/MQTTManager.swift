@@ -100,7 +100,7 @@ extension MQTTManager: CocoaMQTTDelegate {
         if ack == .accept {
             serverConnectionState.send(.connected)
             connectionErrorMessage.send("")
-            self.multipleSubscribe(topics: ["master/temperature", "master/power", "master/temperature/set", "master/fan/set", "master/temperature/log", "garage/gate/status", "master/power/log", "master/fan/log"])
+            self.multipleSubscribe(topics: MQTTTopics.allTopics)
             
             publish(topic: "logs", with: "update")
             publish(topic: "synchronize", with: "update")

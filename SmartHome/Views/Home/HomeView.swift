@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var showingSettings = false
     @EnvironmentObject var homeModel: HomeModel
     @State private var isSprinklerOn = false
+    @State var showingSettings = false
     
     var body: some View {
         NavigationStack {

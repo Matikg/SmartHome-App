@@ -38,7 +38,8 @@
 		E8B6AB552C7E76C600517CD9 /* LogRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB542C7E76C600517CD9 /* LogRowView.swift */; };
 		E8B6AB572C7FC73C00517CD9 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */; };
 		E8B6AB592C80D5F600517CD9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB582C80D5F600517CD9 /* WelcomeView.swift */; };
-		E8B6AB5B2C80E5A200517CD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8B6AB5A2C80E5A200517CD9 /* LaunchScreen.storyboard */; };
+		E8B6AB602C83570F00517CD9 /* rooms.json in Resources */ = {isa = PBXBuildFile; fileRef = E8B6AB5F2C83570F00517CD9 /* rooms.json */; };
+		E8B6AB622C835B7800517CD9 /* MQTTTopics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6AB612C835B7800517CD9 /* MQTTTopics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +77,8 @@
 		E8B6AB542C7E76C600517CD9 /* LogRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRowView.swift; sourceTree = "<group>"; };
 		E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		E8B6AB582C80D5F600517CD9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		E8B6AB5A2C80E5A200517CD9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E8B6AB5F2C83570F00517CD9 /* rooms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = rooms.json; sourceTree = "<group>"; };
+		E8B6AB612C835B7800517CD9 /* MQTTTopics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTTopics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,14 +131,13 @@
 		E8811B5B2BDA4DBA000FC08D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
-				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
-				E8B6AB5A2C80E5A200517CD9 /* LaunchScreen.storyboard */,
-				E8B6AB582C80D5F600517CD9 /* WelcomeView.swift */,
+				E8B6AB5D2C83504200517CD9 /* App */,
 				E8811B6F2BDA6BFC000FC08D /* Models */,
 				E8811B702BDA6C07000FC08D /* Views */,
 				E8811B712BDA6C10000FC08D /* ViewModels */,
-				E8811B842BDA841E000FC08D /* CustomStyles */,
+				E8811B842BDA841E000FC08D /* Components */,
 				E8811B6E2BDA6A3E000FC08D /* MQTT */,
+				E8B6AB5E2C8356D200517CD9 /* Data */,
 				E8811B602BDA4DBE000FC08D /* Assets.xcassets */,
 				E8811B622BDA4DBE000FC08D /* Preview Content */,
 			);
@@ -175,10 +176,10 @@
 			children = (
 				E8B2B9122C79E96700870110 /* Home */,
 				E8B2B9132C79E97700870110 /* Device */,
+				E8B6AB5C2C834FD100517CD9 /* Analyze */,
 				E8811B5E2BDA4DBA000FC08D /* ToolBarView.swift */,
 				E8811B762BDA7E0A000FC08D /* SettingsView.swift */,
-				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
-				E8B6AB542C7E76C600517CD9 /* LogRowView.swift */,
+				E8B6AB582C80D5F600517CD9 /* WelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,7 +193,7 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		E8811B842BDA841E000FC08D /* CustomStyles */ = {
+		E8811B842BDA841E000FC08D /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				E8811B782BDA7FBC000FC08D /* ToolBarWithSettings.swift */,
@@ -202,7 +203,7 @@
 				E8B2B93B2C7B353400870110 /* SetButton.swift */,
 				E8B6AB562C7FC73C00517CD9 /* ProgressIndicator.swift */,
 			);
-			path = CustomStyles;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		E8B2B9122C79E96700870110 /* Home */ = {
@@ -234,6 +235,32 @@
 				E8B2B9392C7B26E700870110 /* AirControlView.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		E8B6AB5C2C834FD100517CD9 /* Analyze */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B7C2BDA80FD000FC08D /* AnalyticsView.swift */,
+				E8B6AB542C7E76C600517CD9 /* LogRowView.swift */,
+			);
+			path = Analyze;
+			sourceTree = "<group>";
+		};
+		E8B6AB5D2C83504200517CD9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E8811B5C2BDA4DBA000FC08D /* SmartHomeApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E8B6AB5E2C8356D200517CD9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E8B6AB5F2C83570F00517CD9 /* rooms.json */,
+				E8B6AB612C835B7800517CD9 /* MQTTTopics.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,9 +323,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8B6AB5B2C80E5A200517CD9 /* LaunchScreen.storyboard in Resources */,
 				E8811B642BDA4DBE000FC08D /* Preview Assets.xcassets in Resources */,
 				E8811B612BDA4DBE000FC08D /* Assets.xcassets in Resources */,
+				E8B6AB602C83570F00517CD9 /* rooms.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +387,7 @@
 				E84FA8962C76542500594AE5 /* HomeScene.swift in Sources */,
 				E8B2B93E2C7B698100870110 /* Log.swift in Sources */,
 				E84FA8942C753A9B00594AE5 /* IndicatorView.swift in Sources */,
+				E8B6AB622C835B7800517CD9 /* MQTTTopics.swift in Sources */,
 				E8811B7D2BDA80FD000FC08D /* AnalyticsView.swift in Sources */,
 				E8811B6D2BDA6A18000FC08D /* MQTTAppState.swift in Sources */,
 				E8B2B93C2C7B353400870110 /* SetButton.swift in Sources */,

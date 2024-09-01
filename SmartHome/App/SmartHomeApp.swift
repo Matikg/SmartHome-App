@@ -14,6 +14,7 @@ struct SmartHomeApp: App {
     
     let homeModel: HomeModel
     let settingsViewModel: SettingsViewModel
+    
     init() {
         let mqttManager = MQTTManager()
         self.homeModel = HomeModel(mqttManager: mqttManager)

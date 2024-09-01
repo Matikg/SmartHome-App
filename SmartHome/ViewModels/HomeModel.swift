@@ -26,6 +26,7 @@ final class HomeModel: ObservableObject {
     
     let minTemperature = 0.0
     let maxTemperature = 30.0
+    
     private let mqttManager: MQTTManager
     private var cancellables = Set<AnyCancellable>()
     
@@ -47,7 +48,6 @@ final class HomeModel: ObservableObject {
                     self.logs.removeAll()
                     self.logs.append(contentsOf: logs)
                 case .powerLog(let logs):
-//                    self.logs.removeAll()
                     self.logs.append(contentsOf: logs)
                 case .fanLog(let logs):
                     self.logs.append(contentsOf: logs)
@@ -84,42 +84,16 @@ final class HomeModel: ObservableObject {
     }
     
     private func loadRooms() {
-        rooms = [
-            Room(id: "1", name: "Kitchen", photo: "kitchen", devices: [
-                Device(id: "101", name: "Ceiling Light", type: .light, isOn: false),
-                Device(id: "111", name: "Coffee Maker Plug", type: .socket, isOn: false),
-                Device(id: "112", name: "Toaster Plug", type: .socket, isOn: false),
-                Device(id: "141", name: "Range Hood Fan", type: .vent, isOn: false)]),
-            
-            Room(id: "2", name: "Living Room", photo: "living-room", devices: [
-                Device(id: "201", name: "Ceiling Light", type: .light, isOn: false),
-                Device(id: "202", name: "Floor Lamp", type: .light, isOn: false),
-                Device(id: "211", name: "TV Plug", type: .socket, isOn: false),
-                Device(id: "212", name: "Sound System Plug", type: .socket, isOn: false),
-                Device(id: "221", name: "Front Door Lock", type: .lock, isOn: false),
-                Device(id: "231", name: "Window Blinds", type: .blinds, isOn: false)]),
-            
-            Room(id: "3", name: "Bedroom", photo: "bedroom", devices: [
-                Device(id: "301", name: "Bedside Lamp 1", type: .light, isOn: false),
-                Device(id: "302", name: "Bedside Lamp 2", type: .light, isOn: false),
-                Device(id: "311", name: "Phone Charger Plug", type: .socket, isOn: false),
-                Device(id: "331", name: "Curtains", type: .blinds, isOn: false)]),
-            
-            Room(id: "4", name: "Bathroom", photo: "bathroom", devices: [
-                Device(id: "401", name: "Ceiling Light", type: .light, isOn: false),
-                Device(id: "402", name: "Mirror Light", type: .light, isOn: false),
-                Device(id: "411", name: "Hair Dryer Plug", type: .socket, isOn: false),
-                Device(id: "441", name: "Exhaust Fan", type: .vent, isOn: false)]),
-            
-            Room(id: "5", name: "Garage", photo: "garage", devices: [
-                Device(id: "501", name: "Overhead Light", type: .light, isOn: false),
-                Device(id: "511", name: "Tool Bench Plug", type: .socket, isOn: false),
-                Device(id: "521", name: "Garage Door Lock", type: .lock, isOn: false)]),
-            
-            Room(id: "6", name: "Garden", photo: "garden", devices: [
-                Device(id: "601", name: "Garden Light", type: .light, isOn: false),
-                Device(id: "621", name: "Gate Lock", type: .lock, isOn: false)])
-        ]
+        if let url = Bundle.main.url(forResource: "rooms", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                rooms = try decoder.decode([Room].self, from: data)
+            }
+            catch {
+                print("Error loading JSON data: \(error)")
+            }
+        }
     }
     
     private func loadScenes() {

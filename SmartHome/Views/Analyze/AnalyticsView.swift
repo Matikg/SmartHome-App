@@ -1,10 +1,3 @@
-//
-//  AnalyticsView.swift
-//  SmartHome
-//
-//  Created by Mateusz Grudzień on 25/04/2024.
-//
-
 import SwiftUI
 import Charts
 
@@ -33,15 +26,33 @@ struct AnalyticsView: View {
         }
     }
     
-    private var averagedLogs: [(date: Date, averageValue: Double)] {
+    // Determines the unit for the selected log type, but returns an empty string if "All" is selected
+    private var selectedUnit: String {
+        if selectedLogType == "All" {
+            return "" // No unit when "All" is selected
+        }
+        return filteredLogs.first?.unit ?? ""
+    }
+    
+    // Process logs for displaying in the chart
+    private var processedLogs: [(date: Date, value: Double)] {
         let calendar = Calendar.current
-        
         let groupedLogs = Dictionary(grouping: filteredLogs, by: { calendar.startOfDay(for: $0.time) })
         
         return groupedLogs.map { (date, logs) in
-            let totalValue = logs.reduce(0) { $0 + $1.value }
-            let averageValue = totalValue / Double(logs.count)
-            return (date: date, averageValue: averageValue)
+            if selectedLogType == "power" {
+                // Calculate the difference between the first and last log entry of the day
+                if let firstLog = logs.first, let lastLog = logs.last {
+                    let energyUsed = lastLog.value - firstLog.value
+                    return (date: date, value: energyUsed)
+                }
+            } else {
+                // Calculate average for other log types
+                let totalValue = logs.reduce(0) { $0 + $1.value }
+                let averageValue = totalValue / Double(logs.count)
+                return (date: date, value: averageValue)
+            }
+            return (date: date, value: 0) // Default return value if something goes wrong
         }
         .sorted(by: { $0.date < $1.date }) // Sort by date
     }
@@ -50,19 +61,27 @@ struct AnalyticsView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Chart {
-                    ForEach(averagedLogs, id: \.date) { entry in
+                    ForEach(processedLogs, id: \.date) { entry in
                         BarMark(
                             x: .value("Date", entry.date, unit: .day),
-                            y: .value("Average Value", entry.averageValue)
+                            y: .value("\(selectedLogType == "power" ? "Energy Used" : "Average Value")\(selectedUnit.isEmpty ? "" : " (\(selectedUnit))")", entry.value)
                         )
                         .foregroundStyle(by: .value("Log Type", selectedLogType))
+                        .annotation(position: .top) { // Add annotation to show the value and unit on top of the bar
+                            Text("\(entry.value, specifier: "%.2f")\(selectedUnit.isEmpty ? "" : " \(selectedUnit)")")
+                                .font(.caption)
+                                .foregroundColor(.primary)
+                        }
                     }
                 }
                 .padding()
+                .chartYAxisLabel {
+                    Text("\(selectedLogType == "power" ? "Energy Used" : "Average Value")\(selectedUnit.isEmpty ? "" : " (\(selectedUnit))")")
+                }
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .day)) // Customize as needed
                 }
-                .frame(height: 200)
+                .frame(height: 300)
                 
                 // Log type picker
                 Picker("Log Type", selection: $selectedLogType) {
@@ -75,8 +94,11 @@ struct AnalyticsView: View {
                 
                 // Date pickers
                 HStack {
-                    DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
-                    DatePicker("End Date", selection: $endDate, displayedComponents: .date)
+                    DatePicker("", selection: $startDate, displayedComponents: .date)
+                        .labelsHidden()
+                    
+                    DatePicker("", selection: $endDate, displayedComponents: .date)
+                        .labelsHidden()
                 }
                 .padding()
                 
@@ -98,3 +120,4 @@ struct AnalyticsView: View {
     AnalyticsView()
         .environmentObject(HomeModel(mqttManager: MQTTManager()))
 }
+

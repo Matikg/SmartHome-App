@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct Room: Identifiable {
+struct Room: Identifiable, Decodable {
     var id: String
     var name: String
     var photo: String
     var devices: [Device]
 }
 
-struct Device: Identifiable {
+struct Device: Identifiable, Decodable {
     var id: String
     var name: String
     var type: DeviceType
@@ -34,7 +34,7 @@ struct Device: Identifiable {
     }
 }
 
-enum DeviceType: String, CaseIterable {
+enum DeviceType: String, CaseIterable, Decodable {
     case light, socket, lock, blinds, vent
     
     var image: String {
